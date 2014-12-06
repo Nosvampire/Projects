@@ -99,7 +99,7 @@ public class TituloDAO {
                     + " UPPER(tit_nombre) LIKE ? ";
             System.out.println("sql [tituloDAO] [listarTitulo]: "+sql);
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, titNombre);
+            stmt.setString(1, "%"+titNombre+"%");
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {

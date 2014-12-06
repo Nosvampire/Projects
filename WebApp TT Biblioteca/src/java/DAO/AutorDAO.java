@@ -1,22 +1,18 @@
 package DAO;
 
 // CRUD listo.
-import Connection.DBConnection;
 import POJO.Autor;
 import POJO.Pais;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AutorDAO {
 
-
-
-    public static void insertAutor(Connection conn,Autor au) {
+    public static void insertAutor(Connection conn, Autor au) {
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO autor VALUES(?,?,?,?,?)";
@@ -38,7 +34,7 @@ public class AutorDAO {
         }
     }
 
-    public static void updateAutor(Connection conn,Autor au) {
+    public static void updateAutor(Connection conn, Autor au) {
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE autor SET "
@@ -65,7 +61,7 @@ public class AutorDAO {
         }
     }
 
-    public static void deleteAutor(Connection conn,Autor au) {
+    public static void deleteAutor(Connection conn, Autor au) {
         PreparedStatement stmt = null;
         PreparedStatement pstmt = null;
         try {
@@ -90,14 +86,21 @@ public class AutorDAO {
         }
     }
 
-    public static List<Autor> listarAutor(Connection conn) {
+    public static List<Autor> listarAutor(Connection conn,String nombre,String apellido) {
         List<Autor> lista = new ArrayList<>();
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
-            stmt = conn.createStatement();
-            String sql = "SELECT * FROM autor a , pais p WHERE a.aut_pais = p.cod_pais;";
+
+            String sql = "SELECT * FROM autor a , pais p "
+                    + "WHERE a.aut_pais = p.cod_pais"
+                    + " AND aut_nombre LIKE ?"
+                    + " AND aut_apellido LIKE ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + nombre + "%");
+            stmt.setString(2, "%" + apellido + "%");
+            System.out.println("sql listAutor: " + sql);
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Autor aut = new Autor();

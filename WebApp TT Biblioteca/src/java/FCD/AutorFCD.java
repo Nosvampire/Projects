@@ -24,7 +24,7 @@ public class AutorFCD {
     public static List<Autor> listResultadoBusqueda(String nombres, String apellidos) {
         Connection conexion = DBConnection.getConexion();
         List<Autor> listResultadoBusqueda = new ArrayList<Autor>();
-        listResultadoBusqueda = AutorDAO.listarAutor(conexion);
+        listResultadoBusqueda = AutorDAO.listarAutor(conexion,nombres,apellidos);
         try {
             conexion.close();
         } catch (SQLException ex) {
