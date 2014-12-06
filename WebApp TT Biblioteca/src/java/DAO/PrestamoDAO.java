@@ -16,7 +16,7 @@ public class PrestamoDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public void insertPrestamo(Prestamo pre) {
+    public static void insertPrestamo(Connection conn, Prestamo pre) {
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO prestamo VALUES (?,?,?,?,?,?,?,?,?,?)";

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">   
+
+        <h:head>
+
+            <link type="text/css" href="/css/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+            <link type="text/css" href="/css/themes/smoothness/jquery-ui.min.css" rel="stylesheet"/>
+            <link type="text/css" href="/css/themes/smoothness/jquery.ui.theme.css" rel="stylesheet"/>        
+            <link type="text/css" href="/css/css_usm.css" rel="stylesheet" />
+        </h:head>
+
+        <h:body >  
+
+            <h:form id="form">
+
+                <div align="left">
+
+                    <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
+
+                        <p:dataTable  var="copia" value="#{copiabean.listCopia}" rows="3" 
+
+                                      paginator="true"  style="text-align:center; width:250px;"
+                                      emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
+
+                            <p:panel  style="text-align:center; font-size: 12px; width:250px">
+
+                                <p:column>
+                                    <h:outputLabel value="Título"/>
+                                    <h:outputLabel value="#{copia.copTitulo}"
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="Código"/>
+                                <h:outputLabel value="#{copia.copCod}"
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="Editorial"/>
+                            <h:outputLabel value="#{copia.editorial.ediNombre}"
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="Autores"/>
+                        <h:outputLabel value="#{copia.autores}"
+                </p:column>
+                <p:column>
+                    <h:outputLabel value="Condición"/>
+                    <h:outputLabel value="#{copia.condicion}"
+            </p:column>
+            <p:column>
+                <h:outputLabel value="Tipo"/>
+                <h:outputLabel value="#{copia.copTipo}"
+        </p:column>
+        <p:column>
+            <h:outputLabel value="Edición"/>
+            <h:outputLabel value="#{copia.copEdicion}"
+    </p:column>
+    <p:column>
+        <h:outputLabel value="ISBN"/>
+        <h:outputLabel value="#{copia.copISBN}"
+</p:column>
+<p:column>
+    <h:outputLabel value="Nº Páginas"/>
+    <h:outputLabel value="#{copia.copPaginas}"
+</p:column>
+<p:column>
+    <h:outputLabel value="Nombre Multa"/>
+    <h:outputLabel value="#{copia.categoriaMulta.camNombre}"
+</p:column>
+<p:column>
+    <h:outputLabel value="Descripción Multa"/>
+    <h:outputLabel value="#{copia.categoriaMulta.camDescripcion}"
+</p:column>
+
+
+<p:commandButton value="Pedir Copia" actionListener="#{prestamobean.añadirPrestamo(copia)}">
+
+</p:commandButton>
+
+
+
+
+
+<br/>
+
+
+
+</p:panel>
+
+</p:dataTable>
+<h:outputLabel value="Dias de prestamo:"/>
+<h:inputText value="#{prestamobean.diasPrestmo}"
+</h:panelGroup>
+
+
+
+</div>
+
+</h:form>
+
+</h:body>
+
+</f:view>
+
+</html>

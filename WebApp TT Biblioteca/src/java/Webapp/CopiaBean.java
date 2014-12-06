@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Webapp;
 
+import FCD.CopiaFCD;
+import POJO.Copia;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,8 +18,10 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "copiabean")
 @SessionScoped
 public class CopiaBean {
+
     private String copTitulo;
     private int copCod;
+    private List<Copia> listCopia;
 
     public String getCopTitulo() {
         return copTitulo;
@@ -34,5 +38,16 @@ public class CopiaBean {
     public void setCopCod(int copCod) {
         this.copCod = copCod;
     }
-    public void consultarCopia(){}
+
+    public List<Copia> getListCopia() {
+        return listCopia;
+    }
+
+    public void setListCopia(List<Copia> listCopia) {
+        this.listCopia = listCopia;
+    }
+
+    public void consultarCopia() {
+        listCopia = CopiaFCD.listResultadoBusqueda(copCod, copTitulo);
+    }
 }
