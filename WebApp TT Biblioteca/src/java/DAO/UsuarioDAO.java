@@ -1,6 +1,7 @@
 package DAO;
 
 import Connection.DBConnection;
+import POJO.Curso;
 import POJO.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +12,7 @@ import java.util.List;
 
 public class UsuarioDAO {
 
-    Connection conn = DBConnection.getConexion();
-
-    public void insertUsuario(Usuario usr) {
+    public void insertUsuario(Connection conn, Usuario usr) {
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INO usuario VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -59,7 +58,7 @@ public class UsuarioDAO {
         }
     }
 
-    public void updateUsuario(Usuario usr) {
+    public void updateUsuario(Connection conn, Usuario usr) {
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE usuario SET "
@@ -112,7 +111,7 @@ public class UsuarioDAO {
         }
     }
 
-    public void deleteUsuario(Usuario usr) {
+    public void deleteUsuario(Connection conn, Usuario usr) {
         PreparedStatement stmt = null;
         try {
             String sql = "DELETE FROM usuario WHERE usr_rut = ? AND usr_dv = ?";
@@ -149,21 +148,37 @@ public class UsuarioDAO {
         }
     }
 
-    public List<Usuario> listarUsuario() {
+    public List<Usuario> listarUsuario(Connection conn) {
         List<Usuario> lista = new ArrayList<>();
         Statement stmt = null;
         ResultSet rs = null;
         try {
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM ";
+            String sql = "SELECT * FROM usuario u, usuario_curso uc, curso c "
+                    + "WHERE u.usr_rut = uc.rut AND "
+                    + "u.usr_dv = uc.dv AND "
+                    + "c.cur_codigo = uc.curso";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-//                Object o = new Object();
-//                
-//                lista.add(o);
+                Usuario us = new Usuario();
+                Curso cur = new Curso();
+                us.setUsrRut(rs.getInt("usr_rut"));
+                us.setUsrDv(rs.getString("usr_dv"));
+                us.setUsrNombres(rs.getString("usr_nombres"));
+                us.setUsrPriApellido(rs.getString("usr_priApellido"));
+                us.setUsrSecApellido(rs.getString("usr_secApellido"));
+                us.setUsrFono(rs.getString("usr_fono"));
+                us.setUsrTipoCuenta(rs.getString("usr_tipoCuenta"));
+                us.setUsrEstado(rs.getString("usr_estado"));
+                us.setUsrMulta(rs.getInt("usr_multa"));
+                cur.setCurCodigo(rs.getString("cur_codigo"));
+                cur.setCurDescripcion(rs.getString("cur_descripcion"));
+                us.setCurso(cur);
+
+                lista.add(us);
             }
         } catch (Exception ex) {
-            throw new RuntimeException("DAO.listar", ex);
+            throw new RuntimeException("UsuarioDAO.listarUsuario", ex);
         } finally {
             try {
                 rs.close();
@@ -174,7 +189,47 @@ public class UsuarioDAO {
             } catch (Exception e) {
             }
         }
-
         return lista;
+    }
+
+    public void actualizarMultaUsuario(Connection conn) {
+        PreparedStatement stmt = null;
+        try {
+            String sql = "";
+            stmt = conn.prepareStatement(sql);
+
+        } catch (Exception e) {
+        }
+    }
+
+    public static boolean loginUsuario(Connection conn, int user, String pass) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean resp = false;
+        try {
+            String sql = "SELECT usr_rut, usr_tipoCuenta, usr_pass FROM usuario "
+                    + "WHERE usr_rut = ? "
+                    + "AND usr_pass = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, user);
+            stmt.setString(2, pass);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                resp = true;
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("UsuaioDAO.loginUsuario", ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        return resp;
     }
 }

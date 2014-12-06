@@ -81,6 +81,7 @@ public class AutorDAO {
         } finally {
             try {
                 stmt.close();
+                pstmt.close();
             } catch (Exception e) {
             }
         }
@@ -92,7 +93,6 @@ public class AutorDAO {
         ResultSet rs = null;
 
         try {
-
             String sql = "SELECT * FROM autor a , pais p "
                     + "WHERE a.aut_pais = p.cod_pais"
                     + " AND aut_nombre LIKE ?"

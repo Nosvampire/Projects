@@ -82,6 +82,7 @@ public class CategoriaMultaDAO {
         } finally {
             try {
                 stmt.close();
+                pstmt.close();
             } catch (Exception e) {
             }
         }

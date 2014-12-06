@@ -91,16 +91,14 @@ public class TituloDAO {
                     + " d.dw_cod,"
                     + " d.dw_cod_superior,"
                     + " d.dw_categoria"
-                    + ""
-                    + " FROM "
-                    + " titulo t"
+                    + " FROM titulo t"
                     + " INNER JOIN dewey d ON d.dw_cod = t.tit_dewey"
                     + " WHERE "
                     + " UPPER(tit_nombre) LIKE ? ";
             System.out.println("sql [tituloDAO] [listarTitulo]: "+sql);
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, "%"+titNombre.toUpperCase()+"%");
-            rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Dewey d = new Dewey(
@@ -128,7 +126,6 @@ public class TituloDAO {
             } catch (Exception e) {
             }
         }
-
         return lista;
     }
 }
