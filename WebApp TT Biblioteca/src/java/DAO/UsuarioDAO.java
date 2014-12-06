@@ -1,11 +1,11 @@
 package DAO;
 
-import Connection.DBConnection;
 import POJO.Curso;
 import POJO.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class UsuarioDAO {
                     }
                 }
             }
-        } catch (Exception ex) {
+        } catch (SQLException | RuntimeException ex) {
             throw new RuntimeException("UsuarioDAO.insertUsuario", ex);
         } finally {
             try {
@@ -101,7 +101,7 @@ public class UsuarioDAO {
                     }
                 }
             }
-        } catch (Exception ex) {
+        } catch (SQLException | RuntimeException ex) {
             throw new RuntimeException("UsuarioDAO.updateUsuario", ex);
         } finally {
             try {
@@ -138,7 +138,7 @@ public class UsuarioDAO {
                     }
                 }
             }
-        } catch (Exception ex) {
+        } catch (SQLException | RuntimeException ex) {
             throw new RuntimeException("UsuarioDAO.deleteUsuario", ex);
         } finally {
             try {
