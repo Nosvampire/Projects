@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>. . : : DIRECTORIO DE PERSONAS : : . .</title>
+
+        <link type="image/x-icon" href="img/usm.png" rel="icon" /> 
+        <link rel="stylesheet" href="css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="css/global.css"/>
+        <link rel="stylesheet" href="css/tla4.min.css"/> 
+        <style type="text/css">
+            .ui-menu, .ui-menu .ui-menu-child {
+                /* background: #c4c4c4 url("/Biblioteca/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo") top repeat-x; */
+                background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+                background: rgba(51, 65, 105, 1) -webkit-gradient(linear, left top, left bottom, from(rgba(173, 174, 192, 1)), to(rgba(255,255,255,0)));
+                background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+            }
+            .ui-menu {
+
+                padding: 0.2em;
+                position: relative;
+                outline: 0 none;
+            }
+            a:visited {
+                text-decoration: underline;
+                color: #E8E8E8;
+            }
+            a:link {
+                text-decoration: underline;
+                color: #E2E2E2;
+            }
+            .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+                border: 1px solid #7096ab;
+                background: #85b2cb url("/Biblioteca/javax.faces.resource/images/ui-bg_highlight-hard_80_85b2cb_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x;
+                background: #85b2cb linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0));
+                background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.6)), to(rgba(255,255,255,0)));
+                background: #85b2cb -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0));
+                font-weight: bold;
+                color: #FFFFFF;
+                -moz-box-shadow: 0 0 5px #85b2cb;
+                -webkit-box-shadow: 0px 0px 8px #85b2cb;
+                box-shadow: 0px 0px 8px #85b2cb;
+            }
+
+        </style>
+        <f:metadata>
+
+        </f:metadata>  
+    </h:head>
+    <h:body>
+        <div id ="navwrapper">
+            <h:form>
+                <p:growl id="messages"/>
+                <p:menubar>
+
+
+                    <p:menuitem value="Inicio" update="" icon="ui-icon-home" />
+                    <p:menuitem value="Prestamo" actionListener="#{autoresbean.redirigir()}" icon="" />
+                    <p:menuitem value="Usuario" url="#" icon="" />
+
+
+                    <p:submenu label="Mantenedores" icon="ui-icon-gear">
+
+                        <p:submenu label="Curso" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="Curso" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="Títulos" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="Editorial" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="Categoría" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="País" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="Estado" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="Autor" icon="ui-icon-search">
+                            <p:menuitem value="Consultar" url="ConsAutores.xhtml" />
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                        <p:submenu label="Préstamo" icon="ui-icon-search">
+
+                            <p:menuitem value="Insertar" url="#" />
+                            <p:menuitem value="Modificar" url="#" />
+                        </p:submenu>
+                    </p:submenu>
+
+
+                </p:menubar>
+
+            </h:form>
+        </div>
+    </h:body>
+</html>

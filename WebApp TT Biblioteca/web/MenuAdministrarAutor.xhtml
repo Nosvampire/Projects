@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">   
+
+        <h:head>
+            <title>. . : : DIRECTORIO DE PERSONAS : : . .</title>
+
+            <link type="image/x-icon" href="img/usm.png" rel="icon" /> 
+            <link rel="stylesheet" href="css/font-awesome.min.css"/>
+            <link rel="stylesheet" href="css/global.css"/>
+            <link rel="stylesheet" href="css/tla4.min.css"/> 
+        </h:head>
+
+        <h:body >  
+
+            <h:form id="form">
+
+                <div align="left">
+
+                    <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
+                        <h:panelGrid>
+                            <p:commandLink  value="Consultar Autores   "/>
+                            <br/>  <br/>
+                            <p:commandLink  value="Agregar Autores   "/>
+                            <br/>  <br/>
+                            <p:commandLink value="Modificar Autores  "/>
+                            <br/>  <br/>
+                            <p:commandLink value="Eliminar Autores  "/>
+                            <br/>  <br/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </div>
+
+            </h:form>
+
+        </h:body>
+
+    </f:view>
+
+</html>

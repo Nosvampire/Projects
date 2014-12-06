@@ -1,0 +1,142 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+*{
+    font-family: 'Noto Sans', sans-serif;
+}
+/*Global*/
+body {
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    padding: 25px;
+    background-image:url("../img/body.png");
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: initial;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    background-color: rgb(202,228,252);
+}
+
+.space--col{
+    width:20px;
+
+}
+
+.home{
+    position:absolute;  
+    left:85%;
+    top:10%;
+    color:#fff;
+}
+
+.home:hover{
+    color:#006BB6;
+}
+
+p{
+    font-size: 16px;
+}
+
+.letra--g{
+    font-size: 25px;
+}
+.letraxs--g{
+    font-size: 25px;
+}
+
+.pad--bor{
+    padding: 0px;
+    border: 0px;
+}
+
+.col--header{
+    width: 50%;
+    left:-20px;
+    top:15px;
+    z-index: 1;
+}
+
+.col--global{  
+    border-right: 5px solid #34495E;
+    border-bottom: 5px solid #34495E;
+    border-radius: 10px 10px 10px 10px;
+    background-color: rgba(255,255,255,0.7);;
+    padding: 20px;
+
+}
+.smallnav li {
+    height: 28px;
+}
+.navbar li {
+    float: left;
+}
+user agent stylesheetli {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.link--g{
+    background-color: #006BB6;
+    color:#fff;
+    font-size:15px;
+    -webkit-transition-property: background-color;
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-timing-function: ease;
+}
+.nav>li>a:focus {
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.boton--g{
+    font-size: 20px;
+    background-color: #006BB6;
+    border-radius: 5px;
+    color:#fff;
+    border:1px solid #006BB6;
+    -webkit-transition-property: background-color;
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-timing-function: ease;
+}
+
+.boton--g:hover{
+    background-color: #fff;
+    color:#006BB6;
+    border:1px solid #006BB6;
+}
+
+.boton--g2{
+    padding: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    background-color: #006BB6;
+    border-radius: 5px;
+    color:#fff;
+    border:1px solid #006BB6;
+    -webkit-transition-property: background-color;
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-timing-function: ease;
+}
+
+.boton--g2:hover{
+    text-decoration: none;
+    background-color: #fff;
+    color:#006BB6;
+    border:1px solid #006BB6;
+}
+
+/*fc.xhtml*/
+.texto--g{
+    font-size: 20px;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger{
+    background-color: #006BB6;
+    color:#fff;
+    width: 20px;
+}

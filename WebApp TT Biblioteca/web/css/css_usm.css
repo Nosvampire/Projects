@@ -1,0 +1,463 @@
+@charset "UTF-8";
+/* CSS Document */
+
+* {
+    margin: 0;
+}
+
+html {
+    height: 100%;
+    background-color: #ffffff;
+    background-image: url(../images/fondo.gif);
+    background-repeat: repeat-x;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    color: #666;
+}
+
+body{
+    height: 90%;
+    background-color: #ffffff;
+    background-image: url(../images/fondo.gif);
+    background-repeat: repeat-x;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    color: #666;
+
+}
+
+.wrapper {
+    width: 80%;
+    height: 100%;
+    background-image: url(../images/fdo_contenido.png);
+    background-repeat: repeat-y;
+    text-align: center;
+}
+
+.push {
+    height:96px;
+}
+
+.documentacionWidth {
+    width: 100%;
+}
+
+.documentacion {
+    width: 50%;
+    height: 100%;
+    background-image: url(../images/fdo_contenido.png);
+    background-repeat: repeat-y;
+    text-align: center;
+}
+
+.txtJustify {
+    text-align: justify;
+}
+
+/*ESTILOS PARA ESTRUCTURA-------------------------------*/
+#contenedor {
+    width: 80%;
+    height: 100%;
+    margin-top: 12px;
+    background-image: url(../images/fdo_contenido.png);
+    background-repeat: repeat-y;
+    background-repeat: repeat-x;
+    text-align: center;
+    background-color: white;
+}
+
+.header {
+    height: 100px;
+    background-color: #ffffff;
+}
+
+.bajada_gris {
+    /*background-color: #f5f6f6;*/
+    /*height          :250px;*/
+}
+
+#bajada_gris_interior{
+    background-color: #ffffff;
+    min-height:70px;
+}
+
+/* ESTILOS PARA TEXTOS GENERALES----------------------------------*/
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #005f94;
+    font-size: 9px;
+    margin-bottom: 14px;
+}
+.txt_azul {
+    color: #005f94;
+}
+.txt_negro{
+    color: #000;
+    text-align:left;
+}
+.txt_negro_bold{
+    color: #000;
+    text-align:left;
+    font-weight: bold;
+}
+
+.txt_negro_300px {
+    color: #000;
+    text-align:left;
+    width: 300px;
+}
+
+.txt_menu{
+    font-size: 9px;
+    text-align:center;
+    font-weight: bold;    
+}
+
+.txt_rojo{
+    color: #D12127;
+}
+
+.txt_blanco{
+    color: #ffffff;
+}
+
+.txt_left{
+    color: #000;
+    text-align:left;
+}
+
+/* ESTILOS PARA LOGIN----------------------------------*/
+.login {
+    /*height: 140px;*/
+    width : 50%;
+    height: 100%;
+    margin-left: 35%;
+    /*float: left;
+    margin-top: 30px;
+    margin-bottom: 20px;*/
+    text-align: center;
+}
+
+#login a {
+    font-size: 9px;
+}
+a:link {
+    color:#666666;
+    text-decoration: none;
+}      /* unvisited link */
+a:visited {
+    color:#999999; text-decoration:none;
+}  /* visited link */
+a:hover {
+    color:#005F94;
+    text-decoration:underline;
+}  /* mouse over link */
+a:active {
+    color:#D12127; text-decoration:underline;
+}  /* selected link */
+
+/* ESTILOS PARA CONTENIDO----------------------------------*/
+#contenido {
+    width: 80%;
+    height: 100%;
+    /*margin-left: 192px;
+    margin-top: 30px;*/
+}
+
+/* ESTILOS PARA VER MAS----------------------------------*/
+.ver_mas {
+    font-size: 9px;
+    text-align: right;
+    color: #005F94;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+
+}
+
+.ver_mas a:link {
+    color:#005F94;
+    text-decoration: none;
+}      /* unvisited link */
+.ver_mas a:visited {
+    color:#4C7694;
+    text-decoration:none;
+}  /* visited link */
+.ver_mas a:hover {
+    color:#005F94;
+    text-decoration:underline;
+}  /* mouse over link */
+.ver_mas a:active {
+    color:#D12127; text-decoration:underline;
+}  /* selected link */
+
+/* ESTILOS PARA FOOTER----------------------------------*/
+.footer {
+    background-color: white;
+    height: 15%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* ESTILOS PARA FOOTER----------------------------------*/
+.prestador {
+    font-size: 9px;
+    text-align:  left;
+}
+
+.prestadorCenter {
+    font-size: 9px;
+    text-align:  center;
+}
+
+.prestadorLeft {
+    font-size: 9px;
+    text-align:  left;
+}
+
+.prestadorRight {
+    font-size: 9px;
+    text-align:  right;
+}
+
+.pendiente {
+    font-size: 9px;
+    color: #000;
+    text-align:  left;
+}
+
+
+.pago {
+    font-size: 9px;
+}
+
+.estilo_footer {
+    font-size: 9px;
+}
+
+.cont_footer {
+    width       : 52%;
+    margin-right: auto;
+    margin-left : auto;
+    color       : white;
+    font-size   : 9px;
+    height      : 100%;
+}
+
+.tablaFooterCol1 {
+    width: 24%;
+}
+
+.tablaFooterCol2 {
+    width: 5%;
+}
+
+.tablaFooterCol3, .tablaFooterCol4 {
+    vertical-align: top;
+}
+
+
+/* ESTILOS ESPECIFICOS PAGINAS INTERIORES----------------------------------*/
+
+.gris_interior {
+    margin-top : 20px;
+    height: 100% !important;
+}
+
+.gris_interior  h1 {
+    font-family  : Arial, Helvetica, sans-serif;
+    color        : #005f94;
+    font-size    : 9px;
+    margin-bottom: 2px;
+}
+
+.contenedorRadio {
+    /*margin-left: 8px;
+    margin-right: 8px;*/
+    font-size: 9px;
+    width: 100% ;
+    height: 100% ;
+}
+
+.contenedorFormulario {
+    text-align:  center;
+    height: 100% !important;   
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    margin-bottom: 2px;
+}
+
+#caja_tit_votacion {
+    padding: 15px;
+    border: 1px dotted #CCC;
+    margin-bottom: 20px;
+}
+
+H3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    margin-bottom: 2px;
+    color: #333;
+}
+
+#tabla_color {
+    border: 1px solid #CCCCCC;
+    font-size: 9px;
+}
+
+#tabla_color .tr1 {
+    background-color: #f5f6f6;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #CCCCCC;
+}
+
+#tabla_color .tr2 {
+    background-color: #fafbfb;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #CCCCCC;
+}
+
+#tabla_color2 {
+    border: 1px solid #CCCCCC;
+    font-size: 9px;
+}
+
+#tabla_color2 .tr1 {
+    background-color: #f5f6f6;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #CCCCCC;
+}
+
+#tabla_color2 .tr2 {
+    background-color: #fafbfb;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #999999;
+}
+
+#tabla_color2 .tr3 {
+    background-color: #CCCCCC;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #CCCCCC;
+}
+
+/* ESTILOS PARA CERRAR SESION----------------------------------*/
+.cerrar_sesion {
+    font-size: 9px;
+    text-align: right;
+    color: #D12127;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.cerrar_sesion a:link {
+    color          : #D12127;
+    text-decoration: none;
+}      /* unvisited link */
+.cerrar_sesion a:visited {
+    color          : #D12127;
+    text-decoration: none;
+}  /* visited link */
+.cerrar_sesion a:hover {
+    color          : #000000;
+    text-decoration: underline;
+}  /* mouse over link */
+.cerrar_sesion a:active {
+    color          : #2D2C2C;
+    text-decoration: underline;
+}  /* selected link */
+#tabla_color input {
+    width: 450px;
+}
+
+.tablaAlignLeft {
+    text-align: left;
+}
+
+.ui-panelgrid tr, .ui-panelgrid td {
+    border:0 !important;
+}
+
+/********************************/
+/*          Tabla Menu          */
+/********************************/
+.tablaMenuCol1 {
+    text-align: left;
+}
+
+.tablaMenuCol2 {
+    text-align: right;
+}
+
+.tablaMenuCol3 {
+    width: 15%;
+}
+
+/********************************/
+/*          Columnas            */
+/********************************/
+.tablaColWidth20 {
+    width: 20%;
+}
+
+.tablaColWidth25 {
+    width: 25%;
+    text-align: left;
+}
+
+.tablaColWidth30 {
+    width: 30%;
+    text-align: left;
+}
+
+.tablaColWidth45 {
+    width: 45%;
+}
+
+/********************************/
+/*       Formularios            */
+/********************************/
+.textoFormulario {
+    font-weight: bold;
+}
+
+/********************************/
+/*    Generales Componenetes    */
+/********************************/
+.ui-fieldset-legend.ui-state-default {
+    width: 20% !important;
+    color: red !important;
+    border-color: red !important;
+}
+
+th .ui-dt-c {
+    text-align: center;
+}
+
+.ui-autocomplete {
+    width: 100%;
+    position: static;
+}
+
+.ui-growl {   
+    position:fixed !important;
+    top: 80% !important;
+    left: 37% !important;
+    width: 360px !important;
+    height: 110px !important;
+    z-index:9999 !important; 
+}
+
+.centered {
+    margin: 0px auto;
+}

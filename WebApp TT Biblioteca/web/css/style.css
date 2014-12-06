@@ -1,0 +1,167 @@
+/* --- Reseter ---------------------------------------------------------------*/
+html, body, header, nav, article, div, footer{
+    margin: 0;
+    padding: 0;
+}
+
+
+html{
+    background-image: url("../img/biblio.jpg");
+    background-color: rgba(74, 2, 2, 0.7);
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+body{
+    margin: 10px auto;
+    width: 90%;
+    max-width: 1000px;
+}
+
+a{
+    text-decoration: none;
+    color: rgba(255,255,255,0.5);
+}
+
+
+
+/* --- Menu ----------------------------------------------------------------- */
+nav{
+    background-color: rgba(255,255,255,0.8);
+    display: inline-block;
+    width: 25%;
+    font-size: 15px;
+    height: 100%;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+.navCat, .navSubCat{
+    margin: 5px;
+    padding: 5px 5px 5px 20px;
+    display: block;
+    cursor: pointer;
+    list-style: none;
+}
+
+.navCat{
+    font-family: arial;
+    font-size: 16px;
+    background-color: rgba(148, 19, 19, 0.82);
+}
+
+.navCat:hover{
+    color: rgba(255,255,255,1);
+}
+
+.navSubCat{
+    background-color: rgba(148, 19, 19, 0.5);
+}
+
+.navSubCat li a:hover{
+    color: rgba(0, 0, 0, 1);
+}
+
+#subPre, #subUsr, #subTit, #subCop, #subCat, #subCur, #subEdi, #subAut, #subPais, #subCon{
+    display: none;
+}
+
+/* --- Labels ----------------------------------------------------------------*/
+
+.lbl1{
+    width: 80px;
+    display: inline-block;
+}
+
+.lbl2{
+    width: 160px;
+    display: inline-block;
+}
+
+.lbl3{
+    width: 240px;
+    display: inline-block;
+}
+
+/* ---- Form ---------------------------------------------------------------- */
+
+form{
+    border: solid 1px;
+    display: block;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* --- Table ---------------------------------------------------------------- */
+
+table{
+    margin: 10px auto;
+    border: 1px solid black;
+}
+
+th, td{
+    border: 1px solid black;
+}
+
+/* -------------------------------------------------------------------------- */
+
+header, footer{
+    background-color: rgba(255,255,255,0.8);
+    margin: 10px auto;
+    padding: 10px;
+}
+
+header{
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+#headerIcon{
+    width: 64px;
+    height: 64px;
+    position: relative;
+    float: left;
+    margin: 10px;
+}
+
+article{
+    background-color: rgba(255,255,255,0.8);
+    display: inline-block;
+    width: 74%;
+    display: inline-block;
+    height: 100%;
+}
+
+footer{
+    border-radius: 0 0 10px 10px;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* --- Mensajes ------------------------------------------------------------- */
+
+.error{
+    color: rgba(255,0,0,1);
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+
+/*@media screen and (max-width: 700px){
+    html, body{
+        margin: 0;
+        padding: 0;
+    }
+    
+    body{
+        width: 100%;
+        min-width: 320px;
+    }
+    
+    header, footer{
+        min-width: 320px;
+    }
+}*/
