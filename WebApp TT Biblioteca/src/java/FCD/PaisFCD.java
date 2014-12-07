@@ -21,10 +21,10 @@ import javax.faces.model.SelectItem;
 public class PaisFCD {
 
     public static List<SelectItem> listResultadoBusqueda() {
-        ArrayList<SelectItem> r = new ArrayList<SelectItem>();
-        for (Pais rap : PaisFCD.listPais()) {
+        ArrayList<SelectItem> r = new ArrayList<>();
+        PaisFCD.listPais().stream().forEach((rap) -> {
             r.add(new SelectItem(rap.getCodPais(), rap.getNomPais()));
-        }
+        });
         return r;
     }
 
@@ -36,7 +36,6 @@ public class PaisFCD {
             conexion.close();
         } catch (SQLException e) {
             System.out.println("Error [PaisFCD][listPais][SQLException]: " + e.getMessage());
-            e.printStackTrace();
         }
         return listAccion;
     }

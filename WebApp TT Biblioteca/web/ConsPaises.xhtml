@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet"  href="css/global.css"/>
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/from-data">
+            <p:growl id="messages" showDetail="true" />
+            <p:panel header="Consultar Paises"  id="panel"  style="margin-bottom:10px; font-size: large"/>
+            <h:panelGrid columns="5">
+                <h:outputLabel styleClass="output--global"
+                               style="margin-left: 15px; margin-right: 15px"
+                               for="customRadio"
+                               value="Nombre"/>
+                <p:inputText id="apP"
+                             style="margin-left: 15px;margin-right: 48px"
+                             value="#{paisbean.nomPais}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <p:commandButton
+                    global="true"
+                    styleClass="btn--global"
+                    ajax="false"
+                    id="submitButton" 
+                    value=" Aceptar"
+                    icon="ui-icon-check"
+                    style="margin-right:  20px; margin-left: 10px"
+                    actionListener="#{paisbean.consultarPais()}"/>
+
+            </h:panelGrid>
+
+        </h:form>
+    </h:body>
+</html>
