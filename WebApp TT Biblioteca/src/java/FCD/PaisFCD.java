@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
 
 /**
@@ -21,9 +23,15 @@ import javax.faces.model.SelectItem;
 public class PaisFCD {
 
     public static List<SelectItem> listResultadoBusqueda() {
+        Connection conn = DBConnection.getConexion();
         ArrayList<SelectItem> r = new ArrayList<SelectItem>();
         for (Pais rap : PaisFCD.listPais()) {
             r.add(new SelectItem(rap.getCodPais(), rap.getNomPais()));
+        }
+          try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return r;
     }

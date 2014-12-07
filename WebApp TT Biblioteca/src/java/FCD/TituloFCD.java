@@ -9,8 +9,11 @@ import Connection.DBConnection;
 import DAO.TituloDAO;
 import POJO.Titulo;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +25,11 @@ public class TituloFCD {
         Connection conn = DBConnection.getConexion();
         List<Titulo> listResultadoBusqueda = new ArrayList<>();
         listResultadoBusqueda = TituloDAO.listarTitulo(conn, titNombre);
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return listResultadoBusqueda;
     }
 }

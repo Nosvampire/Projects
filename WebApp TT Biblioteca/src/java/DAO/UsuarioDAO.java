@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UsuarioDAO {
 
@@ -90,11 +92,11 @@ public class UsuarioDAO {
                     pstmt.setString(1, usr.getCurso().getCurCodigo());
                     pstmt.setInt(2, usr.getUsrRut());
                     pstmt.setString(3, usr.getUsrDv());
-                    
+
                     pstmt.executeUpdate();
                 } catch (Exception e) {
                     throw new RuntimeException("UsuarioDAO.updateUsuarioCurso", e);
-                }finally{
+                } finally {
                     try {
                         pstmt.close();
                     } catch (Exception e) {
@@ -231,5 +233,31 @@ public class UsuarioDAO {
             }
         }
         return resp;
+    }
+
+    public static boolean checkEstadoUsuario(Connection conn, int rut, String dv) {
+        boolean b = false;
+        PreparedStatement stmt = null;
+        try {
+            String sql = "SELECT usr_estado FROM usuario "
+                    + " WHERE usr_rut = ?"
+                    + "AND usr_dv = ?";
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, rut);
+            stmt.setString(2, dv);
+            ResultSet rs = stmt.executeQuery();
+            String estado = "D";
+            while (rs.next()) {
+                estado = rs.getString("usr_estado");
+            }
+            if (estado == "D") {
+            b = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error [UsuarioDAO][checkEstadoUsuario][SQLException]: " + ex.getMessage());
+        }
+
+        return b;
     }
 }

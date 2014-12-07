@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package FCD;
 
 import Connection.DBConnection;
-import DAO.PrestamoDAO;
-import POJO.Prestamo;
+import DAO.UsuarioDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,16 +17,16 @@ import java.util.logging.Logger;
  *
  * @author Niko
  */
-public class PrestamoFCD {
-
-    public static void insertPrestamo(Prestamo prestamo) {
+public class UsuarioFCD {
+    public static boolean checkEstadoUsuario(int rut,String dv){
         Connection conn = DBConnection.getConexion();
-        PrestamoDAO.insertPrestamo(conn, prestamo);
-          try {
+        boolean b = false;
+        UsuarioDAO.checkEstadoUsuario(conn, rut, dv);
+        try {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return b;
     }
-
 }

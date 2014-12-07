@@ -6,6 +6,7 @@
 package Webapp;
 
 import FCD.PrestamoFCD;
+import FCD.UsuarioFCD;
 import POJO.Copia;
 import POJO.Prestamo;
 import POJO.Usuario;
@@ -18,8 +19,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -30,7 +33,7 @@ import javax.faces.bean.SessionScoped;
 public class PrestamoBean {
 
     private List<Prestamo> listPrestamos;
-    private int diasPrestmo;
+    private int diasPrestamo;
     private Prestamo prestamo;
     private int rut;
     private String dv;
@@ -44,11 +47,11 @@ public class PrestamoBean {
     }
 
     public int getDiasPrestmo() {
-        return diasPrestmo;
+        return diasPrestamo;
     }
 
     public void setDiasPrestmo(int diasPrestmo) {
-        this.diasPrestmo = diasPrestmo;
+        this.diasPrestamo = diasPrestmo;
     }
 
     public Prestamo getPrestamo() {
@@ -76,13 +79,22 @@ public class PrestamoBean {
     }
 
     public void añadirPrestamo(Copia copia) {
-        Date d = new Date();
-        LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        java.sql.Date sqlDate = new java.sql.Date(d.getTime());
-        date.plusDays(diasPrestmo);
-        java.sql.Date sqlDateDevolucion = new java.sql.Date(DateTimeConverters.localDateToDate(date).getTime());
-        Usuario usuario = new Usuario(rut, dv, null, null, null, null, null, null, null, 0, null);
-        Prestamo prestamo = new Prestamo(usuario, copia, sqlDate, sqlDateDevolucion, 0, 0, null, "v");
-        PrestamoFCD.insertPrestamo(prestamo);
+        if (UsuarioFCD.checkEstadoUsuario(rut, dv)) {
+            Date d = new Date();
+            LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            java.sql.Date sqlDate = new java.sql.Date(d.getTime());
+            LocalDate dateDevolucion = date.plusDays(diasPrestamo);
+            java.sql.Date sqlDateDevolucion = new java.sql.Date(DateTimeConverters.localDateToDate(dateDevolucion).getTime());
+            Usuario usuario = new Usuario(rut, dv, null, null, null, null, null, null, null, 0, null);
+            Prestamo prestamo = new Prestamo(usuario, copia, sqlDate, sqlDateDevolucion, 0, 0, null, "V");
+            PrestamoFCD.insertPrestamo(prestamo);
+        } else {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario Deshabilitado ", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        diasPrestamo = 0;
+        rut = 0;
+        dv = null;
+
     }
 }

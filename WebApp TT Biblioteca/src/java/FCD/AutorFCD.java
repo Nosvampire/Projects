@@ -50,7 +50,13 @@ public class AutorFCD {
         Connection conn = DBConnection.getConexion();
         List<Autor> listAutors = new ArrayList<>();
         listAutors = AutorDAO.listAutoresPorCodCopia(conn, codCopia);
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return listAutors;
+
     }
 
 }
