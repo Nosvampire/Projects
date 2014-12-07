@@ -1,7 +1,6 @@
 package DAO;
 
 // CRUD listo
-import Connection.DBConnection;
 import POJO.Pais;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaisDAO {
-
-
 
     public static int insertPais(Connection conn,Pais pais) {
         PreparedStatement stmt = null;

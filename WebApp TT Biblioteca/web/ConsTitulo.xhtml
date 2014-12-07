@@ -2,7 +2,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html  xmlns="http://www.w3.org/1999/xhtml"
        xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:f="http://java.sun.com/jsf/core"
        xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta name="viewport" content="width=device-width"/>
@@ -16,11 +15,7 @@
 
             <p:panel header="Consultar Título"  id="panel"  style="margin-bottom:10px; font-size: large">
 
-
-
-
                 <h:panelGrid columns="2">
-
 
                     <h:outputLabel 
                         styleClass="output--global"
@@ -29,17 +24,12 @@
                         value="Nombre:"  />
 
                     <p:inputText 
-
                         style="margin-left: 15px;margin-right: 48px"
-                        value="#{titulobean.titNombre}" 
-                        /> 
-
-
+                        value="#{titulobean.titNombre}" /> 
 
                 </h:panelGrid>
                 <br/>
                 <h:panelGrid columns="4"  >
-
 
                 </h:panelGrid>
 
@@ -47,13 +37,9 @@
 
                 <h:panelGrid columns="7"  >
 
-
-
-
                 </h:panelGrid>
 
                 <br></br>
-
 
             </p:panel>
             <h:panelGrid columns="2">

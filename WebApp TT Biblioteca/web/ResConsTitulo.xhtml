@@ -24,57 +24,38 @@
                     <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
 
                         <p:dataTable  var="autor" value="#{titulobean.listTitulo}" rows="3" 
-
-                                      paginator="true"  style="text-align:center; width:250px;"
+                                      paginator="true"
                                       emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
 
-                            <p:panel  style="text-align:center; font-size: 12px; width:250px">
 
-                                <p:column>
-                                    <h:outputLabel value="Código"/>
-                                    <h:outputLabel value="#{autor.titCod}"
+                            <p:column headerText="Código">
+                                <h:outputLabel value="#{autor.titCod}"/>
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputLabel value="#{autor.titNombre}"/>
+                            </p:column>
+                            <p:column headerText="Tipo">
+                                <h:outputLabel value="#{autor.titTipo}"/>
+                            </p:column>
+                            <p:column headerText="Código Dewey">
+                                <h:outputLabel value="#{autor.titDewey.dwCod}"/>
+                            </p:column>
+                            <p:column headerText="Categoría">
+                                <h:outputLabel value="#{autor.titDewey.dwCategoria}"/>
                             </p:column>
                             <p:column>
-                                <h:outputLabel value="Nombre"/>
-                                <h:outputLabel value="#{autor.titNombre}"
-                        </p:column>
-                        <p:column>
-                            <h:outputLabel value="tipo"/>
-                            <h:outputLabel value="#{autor.titTipo}"
-                    </p:column>
-                    <p:column>
-                        <h:outputLabel value="Código Dewey"/>
-                        <h:outputLabel value="#{autor.titDewey.dwCod}"
-                </p:column>
-                <p:column>
-                    <h:outputLabel value="Categoria"/>
-                    <h:outputLabel value="#{autor.titDewey.dwCategoria}"
-            </p:column>
-            <p:commandButton value="Copías" actionListener="#{copiabean.consultarCopia()}">
-
-            </p:commandButton>
+                                <p:commandButton value="Copías" actionListener="#{copiabean.consultarCopia()}">
+                                </p:commandButton>
+                            </p:column>
+                            <br/>
 
 
 
+                        </p:dataTable>
+                    </h:panelGroup>
 
-
-            <br/>
-
-
-
-        </p:panel>
-
-    </p:dataTable>
-</h:panelGroup>
-
-
-
-</div>
-
-</h:form>
-
-</h:body>
-
-</f:view>
-
+                </div>
+            </h:form>
+        </h:body>
+    </f:view>
 </html>
