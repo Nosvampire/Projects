@@ -7,9 +7,12 @@ package Webapp;
 
 import FCD.CopiaFCD;
 import POJO.Copia;
+import POJO.Titulo;
+import java.io.IOException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -47,7 +50,17 @@ public class CopiaBean {
         this.listCopia = listCopia;
     }
 
-    public void consultarCopia() {
-        listCopia = CopiaFCD.listResultadoBusqueda(copCod, copTitulo);
+    public void consultarCopia(Titulo titulo) throws IOException {
+        listCopia = CopiaFCD.listResultadoBusqueda(titulo.getTitCod());
+        for (int i = 0; i < listCopia.size(); i++) {
+            for (int j = 0; j < listCopia.get(i).getListAutores().size(); j++) {
+                if (listCopia.get(i).getAutores() != null) {
+                    listCopia.get(i).setAutores(listCopia.get(i).getAutores() + listCopia.get(i).getListAutores().get(j).getAutNombre() + " " + listCopia.get(i).getListAutores().get(j).getAutNombre() + "; ");
+                } else {
+                    listCopia.get(i).setAutores("" + listCopia.get(i).getListAutores().get(j).getAutNombre() + " " + listCopia.get(i).getListAutores().get(j).getAutApellido() + ";");
+                }
+            }
+        }
+        FacesContext.getCurrentInstance().getExternalContext().redirect("ResConsCopia.xhtml");
     }
 }

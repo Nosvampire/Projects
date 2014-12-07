@@ -1,6 +1,6 @@
 package POJO;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Copia {
@@ -15,12 +15,13 @@ public class Copia {
     private Condicion condicion;
     private String copYearPublicacion;
     private String copISBN;
-    private Set autores = new HashSet(0);
+    private List<Autor> listAutores;
+    private String autores;
 
     public Copia() {
     }
 
-    public Copia(int copTitulo, int copCod, Editorial editorial, int copEdicion, int copPaginas, String copTipo, CategoriaMulta categoriaMulta, Condicion condicion, String copYearPublicacion, String copISBN) {
+    public Copia(int copTitulo, int copCod, Editorial editorial, int copEdicion, int copPaginas, String copTipo, CategoriaMulta categoriaMulta, Condicion condicion, String copYearPublicacion, String copISBN, List<Autor> listAutores, String autores) {
         this.copTitulo = copTitulo;
         this.copCod = copCod;
         this.editorial = editorial;
@@ -31,6 +32,8 @@ public class Copia {
         this.condicion = condicion;
         this.copYearPublicacion = copYearPublicacion;
         this.copISBN = copISBN;
+        this.listAutores = listAutores;
+        this.autores = autores;
     }
 
     public int getCopTitulo() {
@@ -113,11 +116,20 @@ public class Copia {
         this.copISBN = copISBN;
     }
 
-    public Set getAutores() {
+    public List<Autor> getListAutores() {
+        return listAutores;
+    }
+
+    public void setListAutores(List<Autor> listAutores) {
+        this.listAutores = listAutores;
+    }
+
+    public String getAutores() {
+
         return autores;
     }
 
-    public void setAutores(Set autores) {
+    public void setAutores(String autores) {
         this.autores = autores;
     }
 

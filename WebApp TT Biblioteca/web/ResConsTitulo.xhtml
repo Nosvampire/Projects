@@ -23,28 +23,28 @@
 
                     <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
 
-                        <p:dataTable  var="autor" value="#{titulobean.listTitulo}" rows="3" 
+                        <p:dataTable  var="titulo" value="#{titulobean.listTitulo}" rows="3" 
                                       paginator="true"
                                       emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
 
 
                             <p:column headerText="Código">
-                                <h:outputLabel value="#{autor.titCod}"/>
+                                <h:outputLabel value="#{titulo.titCod}"/>
                             </p:column>
                             <p:column headerText="Nombre">
-                                <h:outputLabel value="#{autor.titNombre}"/>
+                                <h:outputLabel value="#{titulo.titNombre}"/>
                             </p:column>
                             <p:column headerText="Tipo">
-                                <h:outputLabel value="#{autor.titTipo}"/>
+                                <h:outputLabel value="#{titulo.titTipo}"/>
                             </p:column>
                             <p:column headerText="Código Dewey">
-                                <h:outputLabel value="#{autor.titDewey.dwCod}"/>
+                                <h:outputLabel value="#{titulo.titDewey.dwCod}"/>
                             </p:column>
                             <p:column headerText="Categoría">
-                                <h:outputLabel value="#{autor.titDewey.dwCategoria}"/>
+                                <h:outputLabel value="#{titulo.titDewey.dwCategoria}"/>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Copías" actionListener="#{copiabean.consultarCopia()}">
+                                <p:commandButton value="Copías" actionListener="#{copiabean.consultarCopia(titulo)}">
                                 </p:commandButton>
                             </p:column>
                             <br/>

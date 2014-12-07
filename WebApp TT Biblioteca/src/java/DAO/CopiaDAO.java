@@ -107,19 +107,20 @@ public class CopiaDAO {
         }
     }
 
-    public static List<Copia> listarCopias(Connection conn, int copCod, String copTitulo) {
+    public static List<Copia> listarCopias(Connection conn,  int copTitulo) {
         List<Copia> lista = new ArrayList<>();
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = conn.createStatement();
+
             String sql = "SELECT * FROM copia c, editorial e, categoria_multa cm, condicion cd "
                     + "WHERE c.cop_editorial = e.edi_cod AND "
                     + "c.cop_categoriaMulta = cm.cam_cod AND "
                     + "c.cop_condicion = cd.con_codigo AND"
-                    + " c.cop_codigo = ? AND"
                     + " c.cop_titulo = ?";
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, copTitulo);
+            rs = stmt.executeQuery();
             while (rs.next()) {
                 Copia cop = new Copia();
                 Editorial edi = new Editorial();

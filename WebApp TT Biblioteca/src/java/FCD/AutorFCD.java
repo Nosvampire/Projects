@@ -24,7 +24,7 @@ public class AutorFCD {
     public static List<Autor> listResultadoBusqueda(String nombres, String apellidos) {
         Connection conexion = DBConnection.getConexion();
         List<Autor> listResultadoBusqueda = new ArrayList<Autor>();
-        listResultadoBusqueda = AutorDAO.listarAutor(conexion,nombres,apellidos);
+        listResultadoBusqueda = AutorDAO.listarAutor(conexion, nombres, apellidos);
         try {
             conexion.close();
         } catch (SQLException ex) {
@@ -43,6 +43,14 @@ public class AutorFCD {
         } catch (SQLException ex) {
             Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    public static List<Autor> listAutoresPorCodCopia(int codCopia) {
+        Connection conn = DBConnection.getConexion();
+        List<Autor> listAutors = new ArrayList<>();
+        listAutors = AutorDAO.listAutoresPorCodCopia(conn, codCopia);
+        return listAutors;
     }
 
 }

@@ -3,12 +3,15 @@ package DAO;
 // CRUD listo.
 import POJO.Autor;
 import POJO.Pais;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AutorDAO {
 
@@ -87,7 +90,7 @@ public class AutorDAO {
         }
     }
 
-    public static List<Autor> listarAutor(Connection conn,String nombre,String apellido) {
+    public static List<Autor> listarAutor(Connection conn, String nombre, String apellido) {
         List<Autor> lista = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -128,5 +131,36 @@ public class AutorDAO {
             }
         }
         return lista;
+    }
+
+    public static List<Autor> listAutoresPorCodCopia(Connection conn, int codCopia) {
+
+        List<Autor> listAutor = new ArrayList<>();
+        try {
+            String sql = "SELECT a.aut_nombre, a.aut_apellido, a.aut_seudonimo, a.aut_cod"
+                    + " FROM autor a "
+                    + " INNER JOIN copia_autor cp ON cp.cod_autor = a.aut_cod"
+                    + " INNER JOIN copia c ON c.cop_cod = cp.cod_copia"
+                    + " WHERE cp.cod_copia = ?"
+                    + " group by a.aut_nombre, a.aut_apellido, a.aut_seudonimo, a.aut_cod";
+            System.out.println("sql AutorDAO.listAutoresPorCodCopia: " + sql);
+            CallableStatement cstmt = conn.prepareCall(sql);
+            cstmt.setInt(1, codCopia);
+            ResultSet res = cstmt.executeQuery();
+            while (res.next()) {
+                Autor a = new Autor(
+                        res.getInt("aut_cod"),
+                        res.getString("aut_nombre"),
+                        res.getString("aut_apellido"),
+                        res.getString("aut_seudonimo"),
+                        null
+                );
+                listAutor.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAutor;
+
     }
 }

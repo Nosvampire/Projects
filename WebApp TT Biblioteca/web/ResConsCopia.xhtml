@@ -22,75 +22,82 @@
                     <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
 
                         <p:dataTable  var="copia" value="#{copiabean.listCopia}" rows="3" 
-                                      paginator="true"  style="text-align:center; width:250px;"
-                                      emptyMessage="NO SE HAN ENCONTRADO REGISTROS"/>
+                                      paginator="true"  style="width: 1200px"
+                                      emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
 
-                        <p:panel  style="text-align:center; font-size: 12px; width:250px">
 
-                            <p:column>
-                                <h:outputLabel value="Título"/>
+
+                            <p:column headerText="Título">
+
                                 <h:outputLabel value="#{copia.copTitulo}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Código"/>
+                            <p:column headerText="Código">
+
                                 <h:outputLabel value="#{copia.copCod}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Editorial"/>
+                            <p:column headerText="Editorial">
+
                                 <h:outputLabel value="#{copia.editorial.ediNombre}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Autores"/>
+                            <p:column headerText="Autores">
+                               
                                 <h:outputLabel value="#{copia.autores}"/>
+                                
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Condición"/>
-                                <h:outputLabel value="#{copia.condicion}"/>
+                            <p:column headerText="Condición">
+
+                                <h:outputLabel value="#{copia.condicion.conDescripcion}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Tipo"/>
+                            <p:column headerText="Tipo">
+
                                 <h:outputLabel value="#{copia.copTipo}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Edición"/>
+                            <p:column headerText="Edición">
+
                                 <h:outputLabel value="#{copia.copEdicion}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="ISBN"/>
+                            <p:column headerText="ISBN">
+
                                 <h:outputLabel value="#{copia.copISBN}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Nº Páginas"/>
+                            <p:column headerText="Nº Páginas">
+
                                 <h:outputLabel value="#{copia.copPaginas}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Nombre Multa"/>
+                            <p:column headerText="Nombre Multa">
+
                                 <h:outputLabel value="#{copia.categoriaMulta.camNombre}"/>
                             </p:column>
-                            <p:column>
-                                <h:outputLabel value="Descripción Multa"/>
+                            <p:column headerText="Descripción Multa">
+
                                 <h:outputLabel value="#{copia.categoriaMulta.camDescripcion}"/>
                             </p:column>
 
+                            <p:column>
+                                <p:commandButton value="Pedir Copia" actionListener="#{prestamobean.añadirPrestamo(copia)}">
 
-                            <p:commandButton value="Pedir Copia" actionListener="#{prestamobean.añadirPrestamo(copia)}">
-
-                            </p:commandButton>
-
+                                </p:commandButton>
+                            </p:column>
                             <br/>
 
-                        </p:panel>
+
 
                         </p:dataTable>
-                        <h:outputLabel value="Dias de prestamo:"/>
-                        <h:inputText value="#{prestamobean.diasPrestmo}"
-                </h:panelGroup>
+                        <h:panelGrid  columns="2">
+                            <p:outputLabel value="Dias de prestamo:"/>
+                            <p:inputText value="#{prestamobean.diasPrestmo}"/>
+                            <p:outputLabel value="Rut:"/>
+                            <p:inputText value="#{prestamobean.rut}"/>
+                            <p:outputLabel value="Dígito verificador:"/>
+                            <p:inputText value="#{prestamobean.dv}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
 
-            </div>
+                </div>
 
-        </h:form>
+            </h:form>
 
-    </h:body>
+        </h:body>
 
-</f:view>
+    </f:view>
 </html>

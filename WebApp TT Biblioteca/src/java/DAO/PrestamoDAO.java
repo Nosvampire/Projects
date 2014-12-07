@@ -8,6 +8,7 @@ import POJO.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,9 @@ public class PrestamoDAO {
             stmt.setString(10, pre.getPreVigencia());
 
             stmt.executeUpdate();
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
+
+            System.out.println("Error [PrestamoDAO][insertPrestamo][SQLException]: " + ex.getMessage());
             throw new RuntimeException("PrestamoDAO.Prestamo", ex);
         } finally {
             try {

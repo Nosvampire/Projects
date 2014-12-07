@@ -7,6 +7,7 @@ package FCD;
 
 import Connection.DBConnection;
 import DAO.PrestamoDAO;
+import POJO.Prestamo;
 import java.sql.Connection;
 
 /**
@@ -15,9 +16,9 @@ import java.sql.Connection;
  */
 public class PrestamoFCD {
 
-    public static void insertPrestamo() {
+    public static void insertPrestamo(Prestamo prestamo) {
         Connection conn = DBConnection.getConexion();
-        PrestamoDAO.insertPrestamo(conn, null);
+        PrestamoDAO.insertPrestamo(conn, prestamo);
     }
 
 }
