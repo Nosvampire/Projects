@@ -44,7 +44,6 @@ public class PaisFCD {
             conexion.close();
         } catch (SQLException e) {
             System.out.println("Error [PaisFCD][listPais][SQLException]: " + e.getMessage());
-            e.printStackTrace();
         }
         return listAccion;
     }

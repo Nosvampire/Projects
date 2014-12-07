@@ -5,7 +5,7 @@
     <h:head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>. . : : BIBLIOTECA : : . .</title>
+        <title>. . : : DIRECTORIO DE PERSONAS : : . .</title>
 
         <link type="image/x-icon" href="img/usm.png" rel="icon" /> 
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -56,65 +56,29 @@
         <h:form id="forma1" >
             <p:growl id="messages"/>
             <p:menubar>
-                
+
                 <p:menuitem value="Inicio" actionListener="#{viewmanager.setInicio()}" update=":forma"  icon="ui-icon-home" />
-                <p:menuitem value="Prestamo" actionListener="#{viewmanager.setConsultarTitulo()}" update=":forma" icon="" />
-                <p:menuitem value="Usuario" url="#" icon="" />
-
-                <p:submenu label="Mantenedores" icon="ui-icon-gear">
-
-                    <p:submenu label="Curso" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Curso" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Títulos" icon="ui-icon-search">
-                        <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarTitulo()}" update=":forma"   />
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Editorial" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Categoría" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="País" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Estado" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Autor" icon="ui-icon-search">
-                        <p:menuitem value="Consulta"   update=":forma">
-
-                            <f:actionListener binding="#{viewmanager.setConsultarAutor()}" />
-                        </p:menuitem>
-                        <p:menuitem value="Insertar" update=":forma">
-                            <f:actionListener binding="#{autoresbean.redirigeInsertarAutor()}" />
-                            <f:actionListener binding="#{viewmanager.setInsertarAutor()}" />
-                        </p:menuitem>
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Préstamo" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
-                    </p:submenu>
+                <p:submenu label="Prestamo">
+                    <p:menuitem value="Renovar Prestamo" url="#" icon="" />
+                    <p:menuitem value="Listar Prestamos" url="" icon="" /> 
                 </p:submenu>
+
+                <p:submenu label="Usuario">
+                    <p:menuitem value="Cambiar Contraseña" url="#" icon="" />
+                    <p:menuitem value="Consultar Multa" url="#" icon="" />    
+                </p:submenu>
+
+                <p:submenu label="Usuario">
+                    <p:menuitem value="Cambiar Contraseña" url="#" icon="" />
+                    <p:menuitem value="Consultar Multa" url="#" icon="" />    
+                </p:submenu>
+
+                <p:submenu label="Buscar">
+                    <p:menuitem value="Titulo" url="#" icon="" />
+                    <p:menuitem value="Autores" url="#" icon="" />    
+                    <p:menuitem value="Editoriales" url="#" icon="" />    
+                </p:submenu>
+
             </p:menubar>
 
         </h:form>
@@ -132,6 +96,8 @@
                     </div>
                 </div><!--FIN ROW-->
             </header><!--FIN HEADER-->
+
+
 
             <iframe id="mainframe"  name="imain" scrolling="yes" src="#{viewmanager.url}" frameborder="1" width="100%" height="60%">
             </iframe>
