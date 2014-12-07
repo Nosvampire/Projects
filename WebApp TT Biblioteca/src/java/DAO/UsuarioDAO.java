@@ -204,7 +204,8 @@ public class UsuarioDAO {
         }
     }
 
-    public static boolean loginUsuario(Connection conn, int user, String pass) {
+    public static String loginUsuario(Connection conn, int user, String pass) {
+        String tipoUsuario = "";
         PreparedStatement stmt = null;
         ResultSet rs = null;
         boolean resp = false;
@@ -218,8 +219,11 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                resp = true;
+
+                tipoUsuario = rs.getString("usr_tipoCuenta");
+
             }
+
         } catch (Exception ex) {
             throw new RuntimeException("UsuaioDAO.loginUsuario", ex);
         } finally {
@@ -232,7 +236,7 @@ public class UsuarioDAO {
             } catch (Exception e) {
             }
         }
-        return resp;
+        return tipoUsuario;
     }
 
     public static boolean checkEstadoUsuario(Connection conn, int rut, String dv) {
@@ -251,8 +255,8 @@ public class UsuarioDAO {
             while (rs.next()) {
                 estado = rs.getString("usr_estado");
             }
-            if (estado == "D") {
-            b = true;
+            if (estado == "H") {
+                b = true;
             }
         } catch (SQLException ex) {
             System.out.println("Error [UsuarioDAO][checkEstadoUsuario][SQLException]: " + ex.getMessage());

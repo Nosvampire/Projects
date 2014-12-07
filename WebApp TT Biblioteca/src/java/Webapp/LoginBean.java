@@ -5,10 +5,19 @@
  */
 package Webapp;
 
+import FCD.UsuarioFCD;
+import java.io.IOException;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 /**
  *
  * @author Niko
  */
+@ManagedBean(name = "loginbean")
+@SessionScoped
 public class LoginBean {
 
     private int usuario;
@@ -30,7 +39,16 @@ public class LoginBean {
         this.contraseña = contraseña;
     }
 
-    public void login() {
-        
+    public void login() throws IOException {
+        String tipoUsuario = UsuarioFCD.checkTipoUsuario(usuario, contraseña);
+        if ("".equals(tipoUsuario)) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error en datos de Login! ", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            contraseña = "";
+        } else if ("ADM".equals(tipoUsuario) || "BIB".equals(tipoUsuario)) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        } else if ("ALU".equals(tipoUsuario) || "FUN".equals(tipoUsuario) || "PRO".equals(tipoUsuario)) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("indexUsuario.xhtml");
+        }
     }
 }

@@ -19,15 +19,17 @@
     </h:head>
     <h:body id="cuerpo" >
 
-        <h:form id="forma1" >
+        <h:form id="forma1" enctype="multipart/form-data">
+            <p:growl id="messages" showDetail="true"  />  
             <p:panelGrid columns="2" >
                 <f:facet  name="header">
                     Login
                 </f:facet>
                 <p:outputLabel value="Usuario: "/>
-                <p:inputText value=""/>
+                <p:inputText value="#{loginbean.usuario}"/>
                 <p:outputLabel value="Contraseña: "/>
-                <p:inputText value=""/>
+                <p:password value="#{loginbean.contraseña}"/>
+                <p:commandButton value="Ingresar" global="true" ajax="false" actionListener="#{loginbean.login()}" />
             </p:panelGrid>
         </h:form>
     </h:body>
