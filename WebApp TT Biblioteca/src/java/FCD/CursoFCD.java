@@ -6,7 +6,10 @@
 
 package FCD;
 
+import Connection.DBConnection;
+import DAO.CursoDAO;
 import POJO.Curso;
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -14,7 +17,9 @@ import java.util.List;
  * @author nicolas.molina
  */
 public class CursoFCD {
-//    public static List<Curso> listResultadoBusqueda(){
-//        List<Curso>
-//    }
+    public static List<Curso> listResultadoBusqueda(){
+        Connection conn = DBConnection.getConexion();
+        List<Curso> listResultadoCurso = CursoDAO.listarCurso(conn);
+        return listResultadoCurso;
+    }
 }

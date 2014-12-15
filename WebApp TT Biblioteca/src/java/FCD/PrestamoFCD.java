@@ -10,6 +10,8 @@ import DAO.PrestamoDAO;
 import POJO.Prestamo;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,14 +21,27 @@ import java.util.logging.Logger;
  */
 public class PrestamoFCD {
 
-    public static void insertPrestamo(Prestamo prestamo) {
+    public static boolean insertPrestamo(Prestamo prestamo) {
+        boolean b = false;
         Connection conn = DBConnection.getConexion();
-        PrestamoDAO.insertPrestamo(conn, prestamo);
-          try {
+        b = PrestamoDAO.insertPrestamo(conn, prestamo);
+        try {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return b;
     }
 
+    public static List<Prestamo> consultarPrestamo(java.sql.Date fechaInicio, java.sql.Date fechaTermino, int rut) {
+        Connection conn = DBConnection.getConexion();
+        List<Prestamo> listResultado = new ArrayList<>();
+        listResultado = PrestamoDAO.listarPrestamo(conn, fechaInicio, fechaTermino, rut);
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listResultado;
+    }
 }

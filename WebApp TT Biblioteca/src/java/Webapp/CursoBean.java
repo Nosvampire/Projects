@@ -5,6 +5,7 @@
  */
 package Webapp;
 
+import FCD.CursoFCD;
 import POJO.Curso;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -47,6 +48,6 @@ public class CursoBean {
     }
 
     public void consultarCurso() {
-//        listCurso = CursoFCD.
+       listCurso = CursoFCD.listResultadoBusqueda();
     }
 }

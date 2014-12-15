@@ -21,9 +21,9 @@ import java.util.logging.Logger;
  * @author Niko
  */
 public class CopiaFCD {
-    
+
     public static List<Copia> listResultadoBusqueda(int copTitulo) {
-        Connection conn= DBConnection.getConexion();
+        Connection conn = DBConnection.getConexion();
         List<Copia> listCopia = new ArrayList<>();
         listCopia = CopiaDAO.listarCopias(conn, copTitulo);
         for (int i = 0; i < listCopia.size(); i++) {
@@ -32,11 +32,21 @@ public class CopiaFCD {
                 listCopia.get(i).setListAutores(listAutor);
             }
         }
-          try {
+        try {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCopia;
+    }
+
+    public static void modificarCopia(Copia copia) {
+        Connection conn = DBConnection.getConexion();
+        CopiaDAO.updateCopia(conn, copia);
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

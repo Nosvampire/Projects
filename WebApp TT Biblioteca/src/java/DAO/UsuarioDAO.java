@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class UsuarioDAO {
 
-    public void insertUsuario(Connection conn, Usuario usr) {
+    public static void insertUsuario(Connection conn, Usuario usr) {
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INO usuario VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -60,7 +60,7 @@ public class UsuarioDAO {
         }
     }
 
-    public void updateUsuario(Connection conn, Usuario usr) {
+    public static void updateUsuario(Connection conn, Usuario usr) {
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE usuario SET "
@@ -113,7 +113,7 @@ public class UsuarioDAO {
         }
     }
 
-    public void deleteUsuario(Connection conn, Usuario usr) {
+    public static void deleteUsuario(Connection conn, Usuario usr) {
         PreparedStatement stmt = null;
         try {
             String sql = "DELETE FROM usuario WHERE usr_rut = ? AND usr_dv = ?";
@@ -245,7 +245,7 @@ public class UsuarioDAO {
         try {
             String sql = "SELECT usr_estado FROM usuario "
                     + " WHERE usr_rut = ?"
-                    + "AND usr_dv = ?";
+                    + " AND usr_dv = ?";
 
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, rut);
@@ -255,7 +255,7 @@ public class UsuarioDAO {
             while (rs.next()) {
                 estado = rs.getString("usr_estado");
             }
-            if (estado == "H") {
+            if ("H".equals(estado)) {
                 b = true;
             }
         } catch (SQLException ex) {
@@ -263,5 +263,113 @@ public class UsuarioDAO {
         }
 
         return b;
+    }
+
+    public static void actualizarUsuarioMulta(Connection conn, int rut) {
+        PreparedStatement stmt = null;
+        try {
+            String sql = "UPDATE usuario "
+                    + "SET usr_multa = (SELECT SUM(pre_multa - pre_valorCancelado) from prestamo where pre_rut = ?) "
+                    + "WHERE usr_rut = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, rut);
+            stmt.setInt(2, rut);
+
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+            throw new RuntimeException("UsuarioDAO.actualizarUsuarioMulta", ex);
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static List<Usuario> buscarUsuaruioRut(Connection conn, int rut) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> lista = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM usuario WHERE usr_rut = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, rut);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Usuario us = new Usuario(rs.getInt("usr_rut"),
+                        rs.getString("usr_dv"),
+                        rs.getString("usr_nombres"),
+                        rs.getString("usr_priApellido"),
+                        rs.getString("usr_secApellido"),
+                        rs.getString("usr_fono"),
+                        rs.getString("usr_tipoCuenta"),
+                        null,
+                        rs.getString("usr_estado"),
+                        rs.getInt("usr_multa"),
+                        null);
+                lista.add(us);
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("UsuarioDAO.buscarUsuarioRut", ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
+
+    public static List<Usuario> buscarUsuarioNombre(Connection conn, String nombre, String priApellido, String secApellido) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> lista = new ArrayList<>();
+        try {
+            if (nombre != null) {
+                String sql = "SELECT usr_rut, usr_dv, u.usr_nombres, usr_priApellido, usr_secApellido, usr_fono, usr_tipoCuenta, usr_estado, usr_multa FROM usuario WHERE usr_nombres LIKE ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, "%" + nombre + "%");
+            } else if (priApellido != null) {
+                String sql = "SELECT usr_rut, usr_dv, u.usr_nombres, usr_priApellido, usr_secApellido, usr_fono, usr_tipoCuenta, usr_estado, usr_multa FROM usuario WHERE usr_priApellido LIKE ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, "%" + priApellido + "%");
+            } else if (secApellido != null) {
+                String sql = "SELECT usr_rut, usr_dv, u.usr_nombres, usr_priApellido, usr_secApellido, usr_fono, usr_tipoCuenta, usr_estado, usr_multa FROM usuario WHERE usr_secApellido LIKE ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, "%" + secApellido + "%");
+            }
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Usuario us = new Usuario(rs.getInt("usr_rut"),
+                        rs.getString("usr_dv"),
+                        rs.getString("usr_nombres"),
+                        rs.getString("usr_priApellido"),
+                        rs.getString("usr_secApellido"),
+                        rs.getString("usr_fono"),
+                        rs.getString("usr_tipoCuenta"),
+                        null,
+                        rs.getString("usr_estado"),
+                        rs.getInt("usr_multa"),
+                        null);
+                lista.add(us);
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("UsuarioDAO.buscarUsuarioNombre", ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
     }
 }

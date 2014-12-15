@@ -56,14 +56,14 @@
         <h:form id="forma1" >
             <p:growl id="messages"/>
             <p:menubar>
-                
+
                 <p:menuitem value="Inicio" actionListener="#{viewmanager.setInicio()}" update=":forma"  icon="ui-icon-home" />
                 <p:menuitem value="Prestamo" actionListener="#{viewmanager.setConsultarTitulo()}" update=":forma" icon="" />
                 <p:menuitem value="Usuario" url="#" icon="" />
 
                 <p:submenu label="Mantenedores" icon="ui-icon-gear">
 
-                    <p:submenu label="Curso" icon="ui-icon-search">
+                    <p:submenu label="Condición" icon="ui-icon-search">
 
                         <p:menuitem value="Insertar" url="#" />
                         <p:menuitem value="Modificar" url="#" />
@@ -89,7 +89,7 @@
                         <p:menuitem value="Modificar" url="#" />
                     </p:submenu>
                     <p:submenu label="País" icon="ui-icon-search">
-
+                        <p:menuitem value="Insertar"  actionListener="#{viewmanager.setInicio()}" update=":forma"  />
                         <p:menuitem value="Insertar" url="#" />
                         <p:menuitem value="Modificar" url="#" />
                     </p:submenu>
@@ -110,10 +110,11 @@
                         <p:menuitem value="Modificar" url="#" />
                     </p:submenu>
                     <p:submenu label="Préstamo" icon="ui-icon-search">
-
+                        <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarPrestamo()}" update=":forma" />
                         <p:menuitem value="Insertar" url="#" />
                         <p:menuitem value="Modificar" url="#" />
                     </p:submenu>
+
                 </p:submenu>
             </p:menubar>
 

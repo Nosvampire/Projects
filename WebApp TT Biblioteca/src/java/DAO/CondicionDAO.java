@@ -14,7 +14,7 @@ public class CondicionDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public void insertCondicion(Condicion con) {
+    public static void insertCondicion(Connection conn,Condicion con) {
         PreparedStatement stmt = null;
 
         try {
@@ -34,7 +34,7 @@ public class CondicionDAO {
         }
     }
 
-    public void updateCondicion(Condicion con) {
+    public static void updateCondicion(Connection conn,Condicion con) {
         PreparedStatement stmt = null;
 
         try {
@@ -54,7 +54,7 @@ public class CondicionDAO {
         }
     }
 
-    public void deleteCondicion(Condicion con) {
+    public static void deleteCondicion(Connection conn,Condicion con) {
         PreparedStatement stmt = null;
 
         try {
@@ -73,7 +73,7 @@ public class CondicionDAO {
         }
     }
 
-    public List<Condicion> listarCondicion() {
+    public static List<Condicion> listarCondicion(Connection conn) {
         List<Condicion> lista = new ArrayList<>();
         Statement stmt = null;
         ResultSet rs = null;

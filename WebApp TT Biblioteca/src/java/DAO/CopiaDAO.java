@@ -17,7 +17,7 @@ public class CopiaDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public void insertCopia(Copia cop) {
+    public static void insertCopia(Connection conn,Copia cop) {
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO copia VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -44,7 +44,7 @@ public class CopiaDAO {
         }
     }
 
-    public void updateCopia(Copia cop) {
+    public static void updateCopia(Connection conn,Copia cop) {
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE copia SET "
@@ -113,9 +113,10 @@ public class CopiaDAO {
         ResultSet rs = null;
         try {
 
-            String sql = "SELECT * FROM copia c, editorial e, categoria_multa cm, condicion cd "
+            String sql = "SELECT * FROM copia c, editorial e, categoria_multa cm, condicion cd, titulo t "
                     + "WHERE c.cop_editorial = e.edi_cod AND "
-                    + "c.cop_categoriaMulta = cm.cam_cod AND "
+                    + "c.cop_categoriaMulta = cm.cam_cod AND"
+                    + " c.cop_titulo = t.tit_cod AND  "
                     + "c.cop_condicion = cd.con_codigo AND"
                     + " c.cop_titulo = ?";
             stmt = conn.prepareStatement(sql);
@@ -126,6 +127,9 @@ public class CopiaDAO {
                 Editorial edi = new Editorial();
                 CategoriaMulta cm = new CategoriaMulta();
                 Condicion con = new Condicion();
+                
+                //Recoleccion datos titulo
+                cop.setCopNombre("tit_nombre");
 
                 // Recoleccion datos Editorial
                 edi.setEdiCod(rs.getInt("edi_cod"));
@@ -134,6 +138,7 @@ public class CopiaDAO {
                 // Recoleccion datos CategoriaMulta
                 cm.setCamCod(rs.getString("cam_cod"));
                 cm.setCamNombre(rs.getString("cam_nombre"));
+                cm.setCamDescripcion(rs.getString("cam_descripcion"));
 
                 // Recoleccion datos Condicion
                 con.setConCodigo(rs.getString("con_codigo"));
@@ -168,4 +173,5 @@ public class CopiaDAO {
 
         return lista;
     }
+   
 }

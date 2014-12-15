@@ -15,7 +15,8 @@ public class CategoriaMultaDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public void insertCategoriaMulta(CategoriaMulta cm) {
+    public static void insertCategoriaMulta(Connection conn, CategoriaMulta cm) {
+
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO categoria_multa VALUES(?,?,?,?)";
@@ -36,7 +37,7 @@ public class CategoriaMultaDAO {
         }
     }
 
-    public void updateCategoriaMulta(CategoriaMulta cm) {
+    public static void updateCategoriaMulta(Connection conn, CategoriaMulta cm) {
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE categoria_multa SET "
@@ -61,7 +62,7 @@ public class CategoriaMultaDAO {
         }
     }
 
-    public void deleteCategoriaMulta(CategoriaMulta cm, CategoriaMulta cm2, Copia cp) {
+    public void deleteCategoriaMulta(Connection conn, CategoriaMulta cm, CategoriaMulta cm2, Copia cp) {
         PreparedStatement stmt = null;
         PreparedStatement pstmt = null;
         try {

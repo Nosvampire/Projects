@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">   
+
+        <h:head>
+            <title>. . : : BIBLIOTECA : : . .</title>
+
+            <link type="text/css" href="/css/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+            <link type="text/css" href="/css/themes/smoothness/jquery-ui.min.css" rel="stylesheet"/>
+            <link type="text/css" href="/css/themes/smoothness/jquery.ui.theme.css" rel="stylesheet"/>        
+            <link type="text/css" href="/css/css_usm.css" rel="stylesheet" />
+            <script src="../js/localees.js" type="text/JavaScript"></script>
+            <script src="../js/primefaces-overrides.js" type="text/JavaScript"></script>
+        </h:head>
+
+        <h:body>  
+
+            <h:form id="form" >
+                <p:messages id="msgs" />
+                <div align="left">
+                    <h:panelGrid columns="4" >
+                        
+
+                    </h:panelGrid>
+                    <p:dataTable  var="prestamo" value="#{prestamobean.listPrestamos}"  rows="6" 
+                                  paginator="true"  
+                                  emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
+                        <p:column headerText="Título">
+                            <h:outputText value="#{prestamo.copia.copNombre}" />
+                        </p:column>
+
+                        <p:column headerText="Cod. Copia">
+                            <h:outputText value="#{prestamo.copia.copCod}" />
+                        </p:column>
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{prestamo.preFecha}" />
+                        </p:column>
+                        <p:column headerText="Fecha Devolución">
+                            <h:outputText value="#{prestamo.preFechaDevolucion}" />
+                        </p:column>
+                        <p:column headerText="Valor Cancelado">
+                            <h:outputText value="#{prestamo.preValorCancelado}" />
+                        </p:column>
+                        <p:column headerText="Multa">
+                            <h:outputText value="$#{prestamo.preMulta}" />
+                        </p:column>
+                        <p:column headerText="Devolución Efectiva">
+                            <h:outputText value="#{prestamo.preFechaDevEfectiva}" />
+                        </p:column>
+                        
+                    </p:dataTable>
+                </div>
+
+
+                
+            </h:form>
+        </h:body>
+
+    </f:view>
+
+</html>

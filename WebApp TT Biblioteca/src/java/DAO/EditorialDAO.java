@@ -15,7 +15,7 @@ public class EditorialDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public void insertEditorial(Editorial ed) {
+    public static void insertEditorial(Connection conn, Editorial ed) {
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO editorial VALUES(?,?,?)";
@@ -35,7 +35,7 @@ public class EditorialDAO {
         }
     }
 
-    public void updateEditorial(Editorial ed) {
+    public static void updateEditorial(Connection conn, Editorial ed) {
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE editorial SET "
@@ -58,7 +58,7 @@ public class EditorialDAO {
         }
     }
 
-    public void deleteEditorial(Editorial ed) {
+    public static void deleteEditorial(Connection conn, Editorial ed) {
         PreparedStatement stmt = null;
         try {
             String sql = "DELETE FROM editorial WHERE edi_cod = ?";
@@ -76,7 +76,7 @@ public class EditorialDAO {
         }
     }
 
-    public List<Editorial> listarEditorial() {
+    public static List<Editorial> listarEditorial(Connection conn) {
         List<Editorial> lista = new ArrayList<>();
         Statement stmt = null;
         ResultSet rs = null;

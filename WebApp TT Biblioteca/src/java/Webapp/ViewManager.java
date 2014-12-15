@@ -16,30 +16,40 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "viewmanager")
 @SessionScoped
 public class ViewManager implements Serializable {
-    
+
     private String url = "inicio.xhtml";
-    
+
     public String getUrl() {
         return url;
     }
-    
+
     public void setUrl(String url) {
         this.url = url;
     }
-    
+
     public void setConsultarAutor() {
         setUrl("ConsAutores.xhtml");
     }
-    
+
     public void setInicio() {
         setUrl("inicio.xhtml");
     }
-    
+
     public void setInsertarAutor() {
         setUrl("InsertaAutor.xhtml");
     }
-    
+
     public void setConsultarTitulo() {
         setUrl("ConsTitulo.xhtml");
     }
+
+    public void setConsultarCurso() {
+        setUrl("ConsCurso.xhtml");
+    }
+
+    public void setConsultarPais() {
+        setUrl("ConsPais.xhtml");
+    }
+    public void setConsultarPrestamo(){
+    setUrl("ConsPrestamo.xhtml");}
 }

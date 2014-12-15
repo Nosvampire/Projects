@@ -14,7 +14,7 @@ public class DeweyDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public void insertDewey(Dewey dw) {
+    public static void insertDewey(Connection conn,Dewey dw) {
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO dewey VALUES(?,?,?)";
@@ -34,7 +34,7 @@ public class DeweyDAO {
         }
     }
 
-    public void updateDewey(Dewey dw) {
+    public static void updateDewey(Connection conn,Dewey dw) {
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE dewey SET dw_categoria = ? WHERE dw_cod = ?";
@@ -56,7 +56,7 @@ public class DeweyDAO {
 //    No se si se podria eliminar el codigo ... 
 //    en mi opinion no .. 
 //    pero por si acaso lo dejo igual..
-    public void deleteDewey(Dewey dw) {
+    public static void deleteDewey(Connection conn,Dewey dw) {
         PreparedStatement stmt = null;
         try {
             String sql = "DELETE FROM dewey WHERE dw_cod = ?";
@@ -74,7 +74,7 @@ public class DeweyDAO {
         }
     }
 
-    public List<Dewey> listarDewey() {
+    public static List<Dewey> listarDewey(Connection conn) {
         List<Dewey> lista = new ArrayList<>();
         Statement stmt = null;
         ResultSet rs = null;

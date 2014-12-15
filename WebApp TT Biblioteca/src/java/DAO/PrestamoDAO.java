@@ -5,6 +5,7 @@ import Connection.DBConnection;
 import POJO.Copia;
 import POJO.Prestamo;
 import POJO.Usuario;
+import Webapp.LoginBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,8 @@ public class PrestamoDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public static void insertPrestamo(Connection conn, Prestamo pre) {
+    public static boolean insertPrestamo(Connection conn, Prestamo pre) {
+        boolean error = false;
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO prestamo VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -35,15 +37,16 @@ public class PrestamoDAO {
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
-
+            error = true;
             System.out.println("Error [PrestamoDAO][insertPrestamo][SQLException]: " + ex.getMessage());
-            throw new RuntimeException("PrestamoDAO.Prestamo", ex);
+            
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return error;
     }
 
     public void updatePrestamo(Prestamo pre) {
@@ -108,18 +111,24 @@ public class PrestamoDAO {
         }
     }
 
-    public List<Prestamo> listarPrestamo() {
+    public static List<Prestamo> listarPrestamo(Connection conn, java.sql.Date fechaInicio, java.sql.Date fechaTermino, int rut) {
         List<Prestamo> lista = new ArrayList<>();
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = conn.createStatement();
+
             String sql = "SELECT * FROM prestamo p,usuario u, copia c "
                     + "WHERE p.pre_rut = u.usr_rut AND "
                     + "p.pre_dv = u.usr_dv AND "
                     + "p.pre_titulo = c.cop_titulo AND "
-                    + "p.pre_copia = c.cop_cod";
-            rs = stmt.executeQuery(sql);
+                    + "p.pre_copia = c.cop_cod"
+                    + " AND pre_fecha BETWEEN ? AND ?"
+                    + " AND pre_rut = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setDate(1, fechaInicio);
+            stmt.setDate(2, fechaTermino);
+            stmt.setInt(3, rut);
+            rs = stmt.executeQuery();
             while (rs.next()) {
                 Prestamo pre = new Prestamo();
                 Usuario usr = new Usuario();

@@ -5,7 +5,7 @@
     <h:head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>. . : : DIRECTORIO DE PERSONAS : : . .</title>
+        <title>. . : : BIBLIOTECA : : . .</title>
 
         <link type="image/x-icon" href="img/usm.png" rel="icon" /> 
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -59,14 +59,14 @@
 
 
                 <p:menuitem value="Inicio" actionListener="#{viewmanager.setInicio()}" update=":forma"  icon="ui-icon-home" />
-                
+
                 <p:menuitem value="Usuario" url="#" icon="" />
 
 
                 <p:submenu label="Mantenedores" icon="ui-icon-gear">
 
                     <p:submenu label="Curso" icon="ui-icon-search">
-
+                        <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarCurso()}" update=":forma" />
                         <p:menuitem value="Insertar" url="#" />
                         <p:menuitem value="Modificar" url="#" />
                     </p:submenu>

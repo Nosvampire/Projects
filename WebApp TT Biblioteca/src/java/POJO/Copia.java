@@ -6,6 +6,7 @@ import java.util.Set;
 public class Copia {
 
     private int copTitulo;
+    private String copNombre;
     private int copCod;
     private Editorial editorial;
     private int copEdicion;
@@ -21,8 +22,9 @@ public class Copia {
     public Copia() {
     }
 
-    public Copia(int copTitulo, int copCod, Editorial editorial, int copEdicion, int copPaginas, String copTipo, CategoriaMulta categoriaMulta, Condicion condicion, String copYearPublicacion, String copISBN, List<Autor> listAutores, String autores) {
+    public Copia(int copTitulo, String copNombre, int copCod, Editorial editorial, int copEdicion, int copPaginas, String copTipo, CategoriaMulta categoriaMulta, Condicion condicion, String copYearPublicacion, String copISBN, List<Autor> listAutores, String autores) {
         this.copTitulo = copTitulo;
+        this.copNombre = copNombre;
         this.copCod = copCod;
         this.editorial = editorial;
         this.copEdicion = copEdicion;
@@ -42,6 +44,14 @@ public class Copia {
 
     public void setCopTitulo(int copTitulo) {
         this.copTitulo = copTitulo;
+    }
+
+    public String getCopNombre() {
+        return copNombre;
+    }
+
+    public void setCopNombre(String copNombre) {
+        this.copNombre = copNombre;
     }
 
     public int getCopCod() {

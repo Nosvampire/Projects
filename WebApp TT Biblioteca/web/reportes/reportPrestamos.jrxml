@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrestamos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="afd6ae6d-1f77-45fa-b6cf-5ccd6e1711e5">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="rut" class="java.lang.String"/>
+	<parameter name="fecha" class="java.lang.String"/>
+	<field name="preFecha" class="java.lang.String"/>
+	<field name="copia" class="java.lang.String"/>
+	<field name="preFechaDevolucion" class="java.lang.String"/>
+	<field name="preValorCancelado" class="java.lang.String"/>
+	<field name="preMulta" class="java.lang.String"/>
+	<field name="preFechaDevEfectiva" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="189" y="0" width="163" height="36" uuid="c4c522c9-5567-4a49-8e49-65c24addd07c"/>
+				<textElement>
+					<font size="24" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[PRESTAMOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="68" height="20" uuid="95068cde-6ac1-412a-a44b-9069fb33d990"/>
+				<text><![CDATA[Nombre	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="68" height="20" uuid="5520e87c-564b-42b7-bb3f-af13972f93e6"/>
+				<text><![CDATA[Rut	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="67" height="20" uuid="de5be091-39b4-47c5-ab36-710feb7eb080"/>
+				<text><![CDATA[Fecha	:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="36" width="100" height="20" uuid="a4b5c162-cbf8-4eb3-8301-2b19df1e5a4d"/>
+				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="56" width="100" height="20" uuid="da210af0-5bde-40ef-a9e6-7585365f6fb4"/>
+				<textFieldExpression><![CDATA[$P{rut}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="469" y="0" width="86" height="20" uuid="27ac3560-f778-4687-8461-bccb6611d354"/>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="141" y="0" width="68" height="20" uuid="7dbd5510-9506-48d6-acee-19d91efea55a"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="56d907e3-ab7d-4dbd-a2ae-94b3c7e0ed8b"/>
+				<text><![CDATA[Devolucion Efectiva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="cc041bda-a5ef-4c6d-8cdd-9fc588eab777"/>
+				<text><![CDATA[Título]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="0" width="88" height="20" uuid="cfb8e561-7669-4fde-b3bb-1f61ddf288b8"/>
+				<text><![CDATA[Fecha Devolucion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="61" height="20" uuid="2a68b55f-650c-4858-b6b2-38829bcd3485"/>
+				<text><![CDATA[Cod. Copia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="0" width="90" height="20" uuid="48f395ac-d518-4ed7-a4dd-012f718be3fa"/>
+				<text><![CDATA[Valor Cancelado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="0" width="68" height="20" uuid="5642a727-24af-4d98-b149-e9882db16fcf"/>
+				<text><![CDATA[Multa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="141" y="0" width="68" height="20" uuid="1eb1b1ea-4e73-46b2-a052-b63878c96d49"/>
+				<textFieldExpression><![CDATA[$F{preFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="0" width="63" height="20" uuid="e6960a98-3040-450d-b866-1b691fcea4ce"/>
+				<textFieldExpression><![CDATA[$F{copia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="0" width="88" height="20" uuid="452266bc-f70f-4e2c-b8b4-f5c16215b6c4"/>
+				<textFieldExpression><![CDATA[$F{preFechaDevolucion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="297" y="0" width="90" height="20" uuid="f18adf34-b6bd-410e-b282-a1c553f17c32"/>
+				<textFieldExpression><![CDATA[$F{preValorCancelado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="387" y="0" width="68" height="20" uuid="4fc2efec-d138-45d6-846f-c307bdf884f6"/>
+				<textFieldExpression><![CDATA[$F{preMulta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="28cdc10b-da13-44f9-a9c3-94b47cf48549"/>
+				<textFieldExpression><![CDATA[$F{preFechaDevEfectiva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="78" height="20" uuid="fc541cd6-e2de-49ae-ac68-4d74cd4cc6b3"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

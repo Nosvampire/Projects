@@ -5,19 +5,18 @@
  */
 package Webapp;
 
+import FCD.CopiaFCD;
 import FCD.PrestamoFCD;
 import FCD.UsuarioFCD;
+import POJO.Condicion;
 import POJO.Copia;
 import POJO.Prestamo;
 import POJO.Usuario;
 import Util.DateTimeConverters;
+import java.io.IOException;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -37,6 +36,8 @@ public class PrestamoBean {
     private Prestamo prestamo;
     private int rut;
     private String dv;
+    private Date fechaInicio;
+    private Date fechaTermino;
 
     public List<Prestamo> getListPrestamos() {
         return listPrestamos;
@@ -78,8 +79,25 @@ public class PrestamoBean {
         this.dv = dv;
     }
 
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaTermino() {
+        return fechaTermino;
+    }
+
+    public void setFechaTermino(Date fechaTermino) {
+        this.fechaTermino = fechaTermino;
+    }
+
     public void añadirPrestamo(Copia copia) {
-        if (UsuarioFCD.checkEstadoUsuario(rut, dv)) {
+        boolean b = UsuarioFCD.checkEstadoUsuario(rut, dv);
+        if (b == true) {
             Date d = new Date();
             LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             java.sql.Date sqlDate = new java.sql.Date(d.getTime());
@@ -87,7 +105,19 @@ public class PrestamoBean {
             java.sql.Date sqlDateDevolucion = new java.sql.Date(DateTimeConverters.localDateToDate(dateDevolucion).getTime());
             Usuario usuario = new Usuario(rut, dv, null, null, null, null, null, null, null, 0, null);
             Prestamo prestamo = new Prestamo(usuario, copia, sqlDate, sqlDateDevolucion, 0, 0, null, "V");
-            PrestamoFCD.insertPrestamo(prestamo);
+            boolean error = PrestamoFCD.insertPrestamo(prestamo);
+            if (error == false) {
+                Condicion condicion = new Condicion();
+                condicion.setConCodigo("P");
+                condicion.setConDescripcion("Prestado");
+                copia.setCondicion(condicion);
+                CopiaFCD.modificarCopia(copia);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Prestamo Agregado! ", "");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else if (error == true) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Prestamo Duplicado ", "");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario Deshabilitado ", "");
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -96,5 +126,13 @@ public class PrestamoBean {
         rut = 0;
         dv = null;
 
+    }
+
+    public void consultarPrestamo() throws IOException {
+        java.sql.Date fechaInicioSql = new java.sql.Date(fechaInicio.getTime());
+        java.sql.Date fechaTerminoSql = new java.sql.Date(fechaTermino.getTime());
+
+        this.listPrestamos = PrestamoFCD.consultarPrestamo(fechaInicioSql, fechaTerminoSql, rut);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("ResConsPrestamo.xhtml");
     }
 }

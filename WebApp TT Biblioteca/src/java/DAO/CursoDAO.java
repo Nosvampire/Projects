@@ -73,7 +73,7 @@ public class CursoDAO {
         }
     }
 
-    public List<Curso> listarCurso() {
+    public static List<Curso> listarCurso(Connection conn) {
         List<Curso> lista = new ArrayList<>();
         Statement stmt = null;
         ResultSet rs = null;
