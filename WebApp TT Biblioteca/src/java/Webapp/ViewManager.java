@@ -50,6 +50,11 @@ public class ViewManager implements Serializable {
     public void setConsultarPais() {
         setUrl("ConsPais.xhtml");
     }
-    public void setConsultarPrestamo(){
-    setUrl("ConsPrestamo.xhtml");}
+
+    public void setConsultarPrestamo() {
+        setUrl("ConsPrestamo.xhtml");
+    }
+     public void setConsultarCondicion() {
+        setUrl("ResConsCondicion.xhtml");
+    }
 }
