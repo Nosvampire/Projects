@@ -28,4 +28,5 @@ public class Condicion {
     public void setConDescripcion(String conDescripcion) {
         this.conDescripcion = conDescripcion;
     }
+    
 }

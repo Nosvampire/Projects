@@ -18,31 +18,37 @@ import java.util.List;
  */
 public class CondicionFCD {
 
-    public static void insertCondicion(Condicion condicion) {
+    public static boolean insertCondicion(Condicion condicion) {
+        boolean b = false;
         Connection conn = DBConnection.getConexion();
-        CondicionDAO.insertCondicion(conn, condicion);
+        b = CondicionDAO.insertCondicion(conn, condicion);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
     }
 
-    public static void updateCondicion(Condicion condicion) {
+    public static boolean updateCondicion(Condicion condicion, Condicion conOriginal) {
+        boolean b = false;
         Connection conn = DBConnection.getConexion();
-        CondicionDAO.updateCondicion(conn, condicion);
+        b = CondicionDAO.updateCondicion(conn, condicion, conOriginal);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
     }
 
-    public static void deleteCondicion(Condicion condicion) {
+    public static boolean deleteCondicion(Condicion condicion) {
+        boolean b;
         Connection conn = DBConnection.getConexion();
-        CondicionDAO.deleteCondicion(conn, condicion);
+        b = CondicionDAO.deleteCondicion(conn, condicion);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
     }
 
     public static List<Condicion> selectCondicion() {

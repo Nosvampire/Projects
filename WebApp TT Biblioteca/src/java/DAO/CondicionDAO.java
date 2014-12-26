@@ -6,6 +6,7 @@ import POJO.Condicion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,9 @@ public class CondicionDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public static void insertCondicion(Connection conn,Condicion con) {
+    public static boolean insertCondicion(Connection conn, Condicion con) {
         PreparedStatement stmt = null;
+        boolean b = false;
 
         try {
             String sql = "INSERT INTO condicion VALUES (?,?)";
@@ -24,53 +26,67 @@ public class CondicionDAO {
             stmt.setString(2, con.getConDescripcion());
 
             stmt.executeUpdate();
-        } catch (Exception ex) {
-            throw new RuntimeException("CondicionDAO.insertCondicion", ex);
+        } catch (SQLException ex) {
+            System.out.println("Error [CondicionDAO][insertCondicion][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
+
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
+
             }
         }
+        return b;
     }
 
-    public static void updateCondicion(Connection conn,Condicion con) {
+    public static boolean updateCondicion(Connection conn, Condicion con, Condicion conOriginal) {
         PreparedStatement stmt = null;
-
+        boolean b = false;
         try {
-            String sql = "UPDATE condicion SET con_descripcion = ? WHERE con_codigo = ?";
+            String sql = "UPDATE condicion SET con_descripcion = ?, con_codigo = ? WHERE con_codigo = ? AND con_descripcion = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, con.getConDescripcion());
             stmt.setString(2, con.getConCodigo());
+            stmt.setString(3, conOriginal.getConCodigo());
+            stmt.setString(4, conOriginal.getConDescripcion());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CondicionDAO.updateCondicion", ex);
+            System.out.println("Error [CondicionDAO][updateCondicion][SQLException]: " + ex.getMessage());
+            b = true;
+            ex.printStackTrace();
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public static void deleteCondicion(Connection conn,Condicion con) {
+    public static boolean deleteCondicion(Connection conn, Condicion con) {
+        boolean b = false;
         PreparedStatement stmt = null;
 
         try {
-            String sql = "DELETE FROM condicion where con_codigo = ?";
+                String sql = "DELETE FROM condicion WHERE con_codigo = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, con.getConCodigo());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CondicionDAO.deleteCondicion", ex);
+            System.out.println("Error [CondicionDAO][deleteCondicion][SQLException]: " + ex.getMessage());
+            b = true;
+            ex.printStackTrace();
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public static List<Condicion> listarCondicion(Connection conn) {

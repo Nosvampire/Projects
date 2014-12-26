@@ -65,8 +65,9 @@
 
                     <p:submenu label="Condición" icon="ui-icon-search">
                         <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarCondicion()}" update=":forma" />
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsCondicion()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setConsModCondicion()}" update=":forma" />
+                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimCondicion()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="Curso" icon="ui-icon-search">
 
