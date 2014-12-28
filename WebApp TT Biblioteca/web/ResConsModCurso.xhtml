@@ -15,7 +15,7 @@
             <link type="text/css" href="/css/css_usm.css" rel="stylesheet" />
         </h:head>
 
-        <h:body onload="#{condicionbean.consultaCondicion()}">  
+        <h:body onload="#{cursobean.consultarCurso()}">  
 
             <h:form id="form" enctype="multipart/form-data">
                 <p:growl id="messages"   />  
@@ -23,15 +23,15 @@
 
                     <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
 
-                        <p:dataTable  var="condicion" value="#{condicionbean.listCondicion}"  rows="5" 
+                        <p:dataTable  var="curso" value="#{cursobean.listCurso}"  rows="5" 
 
                                       paginator="true"  style="text-align:center;"
                                       emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
                             <p:column headerText="Código">
-                                <p:outputLabel value="#{condicion.conCodigo}"/>
+                                <p:outputLabel value="#{curso.curCodigo}"/>
                             </p:column>
                             <p:column headerText="Descripción">
-                                <p:outputLabel value="#{condicion.conDescripcion}"/>
+                                <p:outputLabel value="#{curso.curDescripcion}"/>
                             </p:column>
                             <p:column headerText="Modificar">
                                 <p:commandButton value="Modificar" oncomplete="PF('dlg').show()"
@@ -39,8 +39,8 @@
                                                  process="@this"
                                                  update=":form1:display"
                                                  global="true">
-                                    <f:actionListener binding="#{condicionbean.selectCondicion(condicion)}"/>
-                                    <f:actionListener binding="#{condicionbean.redirigirModCondicion()}"/>
+                                    <f:actionListener binding="#{cursobean.selectCondicion(curso)}"/>
+                                    <f:actionListener binding="#{cursobean.redirigirModCurso()}"/>
 
 
                                 </p:commandButton>
@@ -57,12 +57,12 @@
                     <p:growl id="messages"   />  
                     <p:panelGrid id="display" columns="2" columnClasses="label,value">
                         <h:outputText value="Código" />
-                        <h:inputText value="#{condicionbean.condicion.conCodigo}"/>
+                        <h:inputText value="#{cursobean.curso.curCodigo}"/>
 
 
                         <h:outputText value="Descripción"/>
-                        <h:inputText value="#{condicionbean.condicion.conDescripcion}"/>
-                        <p:commandButton value="Modificar" ajax="false" global="true" actionListener="#{condicionbean.modCondicion()}">
+                        <h:inputText value="#{cursobean.curso.curDescripcion}"/>
+                        <p:commandButton value="Modificar" ajax="false" global="true" actionListener="#{cursobean.modCurso()}">
                         </p:commandButton>
                     </p:panelGrid>
                 </h:form>

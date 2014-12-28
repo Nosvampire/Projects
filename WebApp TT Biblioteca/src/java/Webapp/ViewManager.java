@@ -44,7 +44,7 @@ public class ViewManager implements Serializable {
     }
 
     public void setConsultarCurso() {
-        setUrl("ConsCurso.xhtml");
+        setUrl("ResConsCurso.xhtml");
     }
 
     public void setConsultarPais() {
@@ -66,6 +66,18 @@ public class ViewManager implements Serializable {
     public void setConsModCondicion() {
         setUrl("ResModCondicion.xhtml");
     }
-    public void setElimCondicion(){
-        setUrl("ElimCondicion.xhtml");}
+
+    public void setElimCondicion() {
+        setUrl("ElimCondicion.xhtml");
+    }
+
+    public void setInsCurso() {
+        setUrl("InsCurso.xhtml");
+    }
+
+    public void setConsModCurso() {
+        setUrl("ResConsModCurso.xhtml");
+    }
+    public void setElimCurso(){
+        setUrl("ElimCurso.xhtml");}
 }

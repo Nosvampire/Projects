@@ -70,9 +70,10 @@
                         <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimCondicion()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="Curso" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                        <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarCurso()}" update=":forma" />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsCurso()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setConsModCurso()}" update=":forma" />
+                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimCurso()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="Títulos" icon="ui-icon-search">
                         <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarTitulo()}" update=":forma"   />

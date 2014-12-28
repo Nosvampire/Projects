@@ -12,9 +12,8 @@ import java.util.List;
 
 public class CursoDAO {
 
-    Connection conn = DBConnection.getConexion();
-
-    public void insertCurso(Curso cur) {
+    public static boolean insertCurso(Connection conn, Curso cur) {
+        boolean b = false;
         PreparedStatement stmt = null;
 
         try {
@@ -25,52 +24,65 @@ public class CursoDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CursoDAO.insertCurso", ex);
+            System.out.println("Error [CursoDAO][insertCurso][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public void updateCurso(Curso cur) {
+    public static boolean updateCurso(Connection conn, Curso cur, Curso curOriginal) {
+        boolean b = false;
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE curso SET cur_descripcion = ? WHERE cur_codigo = ?";
+            String sql = "UPDATE curso SET cur_descripcion = ?, cur_codigo = ? WHERE cur_codigo = ? AND cur_descripcion = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, cur.getCurDescripcion());
             stmt.setString(2, cur.getCurCodigo());
+            stmt.setString(3, curOriginal.getCurCodigo());
+            stmt.setString(4, curOriginal.getCurDescripcion());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CursoDAO.updateCurso", ex);
+            System.out.println("Error [CursoDAO][updatetCurso][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public void deleteCurso(Curso cur) {
+    public static boolean deleteCurso(Connection conn, Curso cur) {
+        boolean b = false;
         PreparedStatement stmt = null;
 
         try {
-            String sql = "DELETE FROM curso WHERE cod_codigo = ?";
+            String sql = "DELETE FROM curso WHERE cur_codigo = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, cur.getCurCodigo());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CursoDAO.deleteCurso", ex);
+            System.out.println("Error [CursoDAO][deleteCurso][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public static List<Curso> listarCurso(Connection conn) {
