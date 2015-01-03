@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,7 +16,8 @@ import java.util.logging.Logger;
 
 public class AutorDAO {
 
-    public static void insertAutor(Connection conn, Autor au) {
+    public static boolean insertAutor(Connection conn, Autor au) {
+        boolean b= false;
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO autor VALUES(?,?,?,?,?)";
@@ -28,16 +30,20 @@ public class AutorDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("AutorDAO.insertAutor", ex);
+            System.out.println("Error [AccionesEventosDAO][listResultadoBusqueda][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public static void updateAutor(Connection conn, Autor au) {
+    public static boolean updateAutor(Connection conn, Autor au,Autor autorOri) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE autor SET "
@@ -55,16 +61,20 @@ public class AutorDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("AutorDAO.updateAutor", ex);
+            System.out.println("Error [AccionesEventosDAO][listResultadoBusqueda][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+           b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public static void deleteAutor(Connection conn, Autor au) {
+    public static boolean deleteAutor(Connection conn, Autor au) {
+        boolean b = false;
         PreparedStatement stmt = null;
         PreparedStatement pstmt = null;
         try {
@@ -74,13 +84,13 @@ public class AutorDAO {
 
             stmt.executeUpdate();
 
-            String sqldca = "DELETE FROM copia_autor WHERE aut_cod = ?";
-            pstmt = conn.prepareStatement(sqldca);
-            pstmt.setInt(1, au.getAutCod());
+         
 
-            pstmt.executeUpdate();
+           
         } catch (Exception ex) {
-            throw new RuntimeException("AutorDAO.deleteAutor", ex);
+            System.out.println("Error [AccionesEventosDAO][listResultadoBusqueda][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+           b = true;
         } finally {
             try {
                 stmt.close();
@@ -88,45 +98,48 @@ public class AutorDAO {
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public static List<Autor> listarAutor(Connection conn, String nombre, String apellido) {
         List<Autor> lista = new ArrayList<>();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
 
         try {
             String sql = "SELECT * FROM autor a , pais p "
                     + "WHERE a.aut_pais = p.cod_pais"
                     + " AND aut_nombre LIKE ?"
                     + " AND aut_apellido LIKE ?";
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, "%" + nombre + "%");
-            stmt.setString(2, "%" + apellido + "%");
+            CallableStatement cs = conn.prepareCall(sql);
+
+            cs.setString(1, "%" + nombre + "%");
+            cs.setString(2, "%" + apellido + "%");
             System.out.println("sql listAutor: " + sql);
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
+            ResultSet res = cs.executeQuery();
+            while (res.next()) {
                 Autor aut = new Autor();
                 Pais ps = new Pais();
-                aut.setAutCod(rs.getInt("aut_cod"));
-                aut.setAutNombre(rs.getString("aut_nombre"));
-                aut.setAutApellido(rs.getString("aut_apellido"));
-                aut.setAutSeudonimo(rs.getString("aut_seudonimo"));
-                ps.setCodPais(rs.getString("cod_pais"));
-                ps.setNomPais(rs.getString("nom_pais"));
+                aut.setAutCod(res.getInt("aut_cod"));
+                aut.setAutNombre(res.getString("aut_nombre"));
+                aut.setAutApellido(res.getString("aut_apellido"));
+                aut.setAutSeudonimo(res.getString("aut_seudonimo"));
+                ps.setCodPais(res.getString("cod_pais"));
+                ps.setNomPais(res.getString("nom_pais"));
                 aut.setAutPais(ps);
 
                 lista.add(aut);
             }
+            res.close();
+            cs.close();
+            
         } catch (SQLException | RuntimeException ex) {
             throw new RuntimeException("AutorDAO.listarAutor", ex);
         } finally {
             try {
-                rs.close();
+
             } catch (Exception e) {
             }
             try {
-                stmt.close();
+
             } catch (Exception e) {
             }
         }

@@ -40,29 +40,35 @@ public class CategoriaMultaDAO {
         return b;
     }
 
-    public static void updateCategoriaMulta(Connection conn, CategoriaMulta cm) {
+    public static boolean updateCategoriaMulta(Connection conn, CategoriaMulta cm, CategoriaMulta categoriaMultaOri) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE categoria_multa SET "
-                    + "cam_nombre = ?, "
+                    + "cam_nombre = ?,"
+                    + " cam_cod = ?, "
                     + "cam_descripcion = ?, "
                     + "cam_valorMultaDia = ? "
                     + "WHERE cam_cod = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, cm.getCamNombre());
-            stmt.setString(2, cm.getCamDescripcion());
-            stmt.setInt(3, cm.getCamValorMultaDia());
-            stmt.setString(4, cm.getCamCod());
+            stmt.setString(2, cm.getCamNombre());
+            stmt.setString(3, cm.getCamDescripcion());
+            stmt.setInt(4, cm.getCamValorMultaDia());
+            stmt.setString(5, categoriaMultaOri.getCamCod());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CategoriaMultaDAO.updateCategoriaMulta", ex);
+            System.out.println("Error [CategoriaDAO][updateCategoriaMulta][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public static boolean deleteCategoriaMulta(Connection conn, CategoriaMulta cm) {

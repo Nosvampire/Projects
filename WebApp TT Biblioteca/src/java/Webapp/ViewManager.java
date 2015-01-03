@@ -27,16 +27,8 @@ public class ViewManager implements Serializable {
         this.url = url;
     }
 
-    public void setConsultarAutor() {
-        setUrl("ConsAutores.xhtml");
-    }
-
     public void setInicio() {
         setUrl("inicio.xhtml");
-    }
-
-    public void setInsertarAutor() {
-        setUrl("InsertaAutor.xhtml");
     }
 
     public void setConsultarTitulo() {
@@ -114,4 +106,37 @@ public class ViewManager implements Serializable {
     public void setElimCategoria() {
         setUrl("ResConsElimCategoria.xhtml");
     }
+
+    public void setConsPais() {
+        setUrl("ResConsPais.xhtml");
+    }
+
+    public void setInsPais() {
+        setUrl("InsPais.xhtml");
+    }
+
+    public void setModPais() {
+        setUrl("ResModPais.xhtml");
+    }
+
+    public void setElimPais() {
+        setUrl("ResConsElimPais.xhtml");
+    }
+
+    public void setConsAutor() {
+        setUrl("ConsAutores.xhtml");
+    }
+
+    public void setInsAutor() {
+        setUrl("InsertaAutor.xhtml");
+    }
+
+    public void setModAutor() {
+        setUrl("ConsModAutor.xhtml");
+    }
+
+    public void setElimAutor() {
+        setUrl("ConsElimAutor.xhtml");
+    }
+
 }

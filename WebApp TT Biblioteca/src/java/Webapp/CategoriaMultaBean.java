@@ -128,5 +128,17 @@ public class CategoriaMultaBean {
         this.categoriaMultaOri.setCamValorMultaDia(categoriaMulta.getCamValorMultaDia());
        
     }
+     public void modCategoria() {
+
+        boolean error = CategoriaMultaFCD.updateCategoriaMulta(categoriaMulta, categoriaMultaOri);
+        if (error == true) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la modificación", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage msg = new FacesMessage("Modificación exitosa.", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+
+    }
 
 }

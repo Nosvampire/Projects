@@ -33,7 +33,7 @@ public class AutorFCD {
         return listResultadoBusqueda;
     }
 
-    public static void insertaAutor(String nombre, Autor autor) {
+    public static void insertaAutor(Autor autor) {
         Connection conexion = DBConnection.getConexion();
 
         AutorDAO.insertAutor(conexion, autor);
@@ -59,4 +59,35 @@ public class AutorFCD {
 
     }
 
+    public static boolean insertAutor(Autor autor) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = AutorDAO.insertAutor(conn, autor);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
+    public static boolean deleteAutor(Autor autor) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = AutorDAO.deleteAutor(conn, autor);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+       public static boolean updateAutor(Autor autor, Autor autorOri) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = AutorDAO.updateAutor(conn, autor, autorOri);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return b;
+    }
 }

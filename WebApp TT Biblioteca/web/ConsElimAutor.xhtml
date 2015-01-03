@@ -2,24 +2,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html  xmlns="http://www.w3.org/1999/xhtml"
        xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:f="http://java.sun.com/jsf/core"
        xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta name="viewport" content="width=device-width"/>
-        <link rel="stylesheet"  href="../css/global.css"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet"  href="css/global.css"/>
     </h:head>
-    <h:body onload="#{autoresbean.redirigeInsertarAutor()}">
+    <h:body>
 
         <h:form enctype="multipart/form-data">  
             <p:growl id="messages" showDetail="true"  />  
 
-            <p:panel header="Inserta Autores"  id="panel"  style="margin-bottom:10px; font-size: large">
+            <p:panel header="Consultar Autores"  id="panel"  style="margin-bottom:10px; font-size: large" >
 
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="5">
 
                     <h:outputLabel 
                         styleClass="output--global"
                         style="margin-left: 15px;margin-right: 15px"
+                        for="customRadio" 
                         value="Apellidos:"/>
 
                     <p:inputText 
@@ -27,38 +28,21 @@
                         style="margin-left: 15px;margin-right: 48px"
                         value="#{autoresbean.apellido}" 
                         /> 
-
                     <h:outputLabel 
                         styleClass="output--global"
                         style="margin-left: 15px;margin-right: 15px"
-                        value="Nombres:"  />
+                        for="customRadio" 
+                        value="Nombres:"/>
 
                     <p:inputText 
                         id="apM"
                         style="margin-left: 15px;margin-right: 15px"
-                        value="#{autoresbean.nombre}" 
-                        />
-
-                    <h:outputLabel 
-                        styleClass="output--global"
-                        style="margin-left: 15px;margin-right: 15px"
-                        value="Seudonimo:"  />
-
-                    <p:inputText 
-                        style="margin-left: 15px;margin-right: 15px"
-                        value="#{autoresbean.seudonimo}" 
-                        />
-
-                    <h:outputLabel style="margin-left: 15px;margin-right: 15px" value="País:"/>
-                    <p:selectOneMenu style="margin-left: 15px;margin-right: 15px" value="#{autoresbean.codPais}">
-                        <f:selectItems value="#{autoresbean.listPais}" />  
-                    </p:selectOneMenu>
+                        value="#{autoresbean.nombre}"/>
 
 
                 </h:panelGrid>
                 <br/>
                 <h:panelGrid columns="4"  >
-
 
                 </h:panelGrid>
 
@@ -80,7 +64,7 @@
                     value=" Aceptar"
                     icon="ui-icon-check"
                     style="margin-right:  20px; margin-left: 10px"
-                    actionListener="#{autoresbean.insertarPais()}"/>
+                    actionListener="#{autoresbean.consultarAutoresElim()}"/>
 
             </h:panelGrid>
 

@@ -134,11 +134,28 @@ public class EditorialBean {
     public void redirigirModEditorial() {
         this.ediOriginal.setEdiCod(editorial.getEdiCod());
         this.ediOriginal.setEdiNombre(editorial.getEdiNombre());
-        this.ediOriginal.setEdiPais(editorial.getEdiPais());
+        Pais pais2 = new Pais();
+        List<Pais> lPais = PaisFCD.listPais();
+        for (int i = 0; i < lPais.size(); i++) {
+            if (lPais.get(i).getCodPais() == codPais) {
+                pais2.setNomPais(lPais.get(i).getNomPais());
+            }
+        }
+        pais2.setCodPais(codPais);
+        this.ediOriginal.setEdiPais(pais2);
+        editorial.setEdiPais(pais2);
     }
 
     public void modEditorial() {
-
+        Pais pais2 = new Pais();
+        List<Pais> lPais = PaisFCD.listPais();
+        for (int i = 0; i < lPais.size(); i++) {
+            if (lPais.get(i).getCodPais().equals(codPais)) {
+                pais2.setNomPais(lPais.get(i).getNomPais());
+            }
+        }
+        pais2.setCodPais(codPais);
+        editorial.setEdiPais(pais2);
         boolean error = EditorialFCD.updateEditorial(editorial, ediOriginal);
         if (error == true) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la modificación", "");

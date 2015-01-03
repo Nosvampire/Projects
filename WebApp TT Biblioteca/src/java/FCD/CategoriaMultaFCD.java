@@ -29,15 +29,6 @@ public class CategoriaMultaFCD {
         return b;
     }
 
-    public static void updateCategoriaMulta(CategoriaMulta categoriaMulta) {
-        Connection conn = DBConnection.getConexion();
-        CategoriaMultaDAO.updateCategoriaMulta(conn, categoriaMulta);
-        try {
-            conn.close();
-        } catch (Exception e) {
-        }
-    }
-
     public static boolean deleteCategoriaMulta(CategoriaMulta categoriaMulta) {
         boolean b;
         Connection conn = DBConnection.getConexion();
@@ -58,5 +49,13 @@ public class CategoriaMultaFCD {
         } catch (Exception e) {
         }
         return listCategoriaMulta;
+    }
+
+    public static boolean updateCategoriaMulta(CategoriaMulta categoriaMulta, CategoriaMulta categoriaMultaOri) {
+        Connection conn = DBConnection.getConexion();
+        boolean b;
+        b = CategoriaMultaDAO.updateCategoriaMulta(conn, categoriaMulta, categoriaMultaOri);
+
+        return b;
     }
 }

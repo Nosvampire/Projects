@@ -93,25 +93,25 @@
                         <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimCategoria()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="País" icon="ui-icon-search">
-                        <p:menuitem value="Insertar"  actionListener="#{viewmanager.setInicio()}" update=":forma"  />
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                        <p:menuitem value="Consultar"  actionListener="#{viewmanager.setConsPais()}" update=":forma"  />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsPais()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setModPais()}" update=":forma" />
+                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimPais()}" update=":forma" />
                     </p:submenu>
-                    <p:submenu label="Estado" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                    <p:submenu label="Condición" icon="ui-icon-search">
+                        <p:menuitem value="Consultar"  actionListener="#{viewmanager.setConsEstado()}" update=":forma"  />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsEstado()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setModEstado()}" update=":forma" />
+                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimEstado()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="Autor" icon="ui-icon-search">
-                        <p:menuitem value="Consulta"   update=":forma">
-
-                            <f:actionListener binding="#{viewmanager.setConsultarAutor()}" />
-                        </p:menuitem>
-                        <p:menuitem value="Insertar" update=":forma">
-                            <f:actionListener binding="#{autoresbean.redirigeInsertarAutor()}" />
-                            <f:actionListener binding="#{viewmanager.setInsertarAutor()}" />
-                        </p:menuitem>
-                        <p:menuitem value="Modificar" url="#" />
+                       
+                            <p:menuitem value="Consultar"  actionListener="#{viewmanager.setConsAutor()}" update=":forma"  />
+                            <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsAutor()}" update=":forma" />
+                            <p:menuitem value="Modificar" actionListener="#{viewmanager.setModAutor()}" update=":forma" />
+                            <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimAutor()}" update=":forma" />
+                      
+             
                     </p:submenu>
                     <p:submenu label="Préstamo" icon="ui-icon-search">
                         <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarPrestamo()}" update=":forma" />

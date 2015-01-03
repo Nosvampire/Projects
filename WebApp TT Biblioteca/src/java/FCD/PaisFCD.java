@@ -28,7 +28,7 @@ public class PaisFCD {
         for (Pais rap : PaisFCD.listPais()) {
             r.add(new SelectItem(rap.getCodPais(), rap.getNomPais()));
         }
-          try {
+        try {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AutorFCD.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,12 +60,37 @@ public class PaisFCD {
 //        }
 //        return listAccion;
 //    }
+    public static boolean insertaPais(Pais pais) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = PaisDAO.insertPais(conn, pais);
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error [PaisFCD][listPais][SQLException]: " + e.getMessage());
+        }
+        return b;
 
-    public static int insertaPais(Pais pais) {
-        int error;
-        Connection con = DBConnection.getConexion();
-        error = PaisDAO.insertPais(con, pais);
-        return error;
+    }
+      public static boolean updatePais(Pais pais, Pais paisOri) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = PaisDAO.updatePais(conn, pais, paisOri);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+         public static boolean deletePais(Pais pais) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = PaisDAO.deletePais(conn, pais);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return b;
     }
 
 }

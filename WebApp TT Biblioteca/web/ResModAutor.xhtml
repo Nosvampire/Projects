@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">   
+
+        <h:head>
+
+            <link type="text/css" href="/css/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+            <link type="text/css" href="/css/themes/smoothness/jquery-ui.min.css" rel="stylesheet"/>
+            <link type="text/css" href="/css/themes/smoothness/jquery.ui.theme.css" rel="stylesheet"/>        
+            <link type="text/css" href="/css/css_usm.css" rel="stylesheet" />
+        </h:head>
+
+        <h:body onload="#{autoresbean.redirigeModificarAutor()}">  
+
+            <h:form id="form" enctype="multipart/form-data">
+                <p:growl id="messages"   />  
+                <div align="left">
+
+                    <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
+
+                        <p:dataTable  var="autor" value="#{autoresbean.listAutor}"  rows="5" 
+
+                                      paginator="true"  style="text-align:center;"
+                                      emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
+                            <p:column headerText="Apellidos">
+                                <p:outputLabel value="#{autor.autApellido}"/>
+                            </p:column>
+                            <p:column headerText="Nombres">
+                                <p:outputLabel value="#{autor.autNombre}"/>
+                            </p:column>
+                            <p:column headerText="Seudónimo">
+                                <p:outputLabel value="#{autor.autSeudonimo}"/>
+                            </p:column>
+                              <p:column headerText="País">
+                                  <p:outputLabel value="#{autor.autPais.nomPais}"/>
+                            </p:column>
+                            <p:column headerText="Modificar">
+                                <p:commandButton value="Modificar" oncomplete="PF('dlg').show()"
+                                                 ajax="true"
+                                                 process="@this"
+                                                 update=":form1:display"
+                                                 global="true">
+                                    <f:actionListener binding="#{autoresbean.selectAutor(autor)}"/>
+                                    <f:actionListener binding="#{autoresbean.redirigirModAutor()}"/>
+
+
+                                </p:commandButton>
+                            </p:column>
+
+
+                        </p:dataTable>
+                    </h:panelGroup>
+
+                </div>
+            </h:form>
+            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                <h:form id="form1" enctype="multipart/form-data">
+                    <p:growl id="messages"   />  
+                    <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                        <h:outputText value="Apellidos" />
+                        <h:inputText value="#{autoresbean.autor.autApellido}"/>
+
+
+                        <h:outputText value="Nombres"/>
+                        <h:inputText value="#{autoresbean.autor.autNombre}"/>
+                         <h:outputText value="Seudónimo"/>
+                         <h:inputText value="#{autoresbean.autor.autSeudonimo}"/>
+                        <h:outputText value="País"/>
+                        <p:selectOneMenu style="margin-top: 5px" value="#{autoresbean.codPais}">
+                            <f:selectItems value="#{autoresbean.listPais}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton value="Modificar" ajax="false" global="true" actionListener="#{autoresbean.modAutor()}">
+                        </p:commandButton>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+
+
+        </h:body>
+
+    </f:view>
+
+</html>

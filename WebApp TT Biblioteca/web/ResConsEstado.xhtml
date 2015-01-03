@@ -14,7 +14,7 @@
             <link type="text/css" href="/css/css_usm.css" rel="stylesheet" />
         </h:head>
 
-        <h:body onload="#{paisbean.consultarPais()}">  
+        <h:body onload="#{es}">  
 
             <h:form id="form">
 
@@ -22,17 +22,16 @@
 
                     <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
 
-                        <p:dataTable  var="pais" value="#{paisbean.listPais}" rows="5" 
+                        <p:dataTable  var="curso" value="#{paisb}" rows="5" 
 
-                                      paginator="true"  style="text-align:center;"
-                                      emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
+                                     paginator="true"  style="text-align:center;"
+                                     emptyMessage="NO SE HAN ENCONTRADO REGISTROS">
                             <p:column headerText="Código">
-                                <p:outputLabel value="#{paisbean.codPais}"/>
+                                <p:outputLabel value="#{curso.curCodigo}"/>
                             </p:column>
-                            <p:column headerText="País">
-                                <p:outputLabel value="#{paisbean.nomPais}"/>
+                            <p:column headerText="Descripción">
+                                <p:outputLabel value="#{curso.curDescripcion}"/>
                             </p:column>
-                          
 
                         </p:dataTable>
                     </h:panelGroup>

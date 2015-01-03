@@ -17,6 +17,7 @@ public class PaisBean {
     private String nomPais;
     private List<Pais> listPais;
     private Pais pais;
+    private Pais paisOri;
 
     public String getCodPais() {
         return codPais;
@@ -50,14 +51,55 @@ public class PaisBean {
         this.pais = pais;
     }
 
-    public void insertarPais(){
-        PaisFCD.insertaPais(pais);
-        FacesMessage msg = new FacesMessage("Mdificación exitosa.", "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-    
     public void consultarPais() throws IOException {
         listPais = PaisFCD.listPais();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("ResConsPais.xhtml");
+
+    }
+
+    public void insPais() {
+        pais.setCodPais(codPais);
+        pais.setNomPais(nomPais);
+
+        boolean error = PaisFCD.insertaPais(pais);
+        if (error == true) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la inserción", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage msg = new FacesMessage("Inserción exitosa.", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+
+    }
+
+    public void selectPais(Pais pais) {
+        this.pais = pais;
+    }
+      public void redirigirModPais() {
+        this.paisOri.setCodPais(pais.getCodPais());
+        this.paisOri.setNomPais(pais.getNomPais());
+        
+    }
+      
+    public void modPais() {
+
+        boolean error = PaisFCD.updatePais(pais, paisOri);
+        if (error == true) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la modificación", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage msg = new FacesMessage("Modificación exitosa.", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+
+    }
+        public void elimPais() {
+        boolean error = PaisFCD.deletePais(pais);
+        if (error == true) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la eliminación", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage msg = new FacesMessage("Eliminación exitosa.", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 }

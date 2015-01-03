@@ -11,9 +11,9 @@ import java.util.List;
 
 public class PaisDAO {
 
-    public static int insertPais(Connection conn,Pais pais) {
+    public static boolean insertPais(Connection conn, Pais pais) {
         PreparedStatement stmt = null;
-        int error =0;
+        boolean b = false;
         try {
             String sql = "INSERT INTO pais VALUES (?,?)";
             stmt = conn.prepareStatement(sql);
@@ -27,35 +27,42 @@ public class PaisDAO {
             try {
                 stmt.close();
             } catch (Exception e) {
-                  System.out.println("Error [PaisDAO][insertPais][SQLException]: " + e.getMessage());
-                error = 1;
+                System.out.println("Error [PaisDAO][insertPais][SQLException]: " + e.getMessage());
+                b = true;
             }
         }
-        return  error;
+        return b;
     }
 
-    public static void updatePais(Connection conn,Pais pais) {
+    public static boolean updatePais(Connection conn, Pais pais,Pais paisOri) {
+        boolean b = true;
         PreparedStatement stmt = null;
 
         try {
-            String sql = "UPDATE pais SET nom_pais = ? WHERE cod_pais = ?";
+            String sql = "UPDATE pais SET"
+                    + " nom_pais = ?,"
+                    + " cod_pais = ?"
+                    + " WHERE cod_pais = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, pais.getNomPais());
             stmt.setString(2, pais.getCodPais());
+             stmt.setString(3, paisOri.getCodPais());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("PaisDAO.updatePais", ex);
+         b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
-                 System.out.println("Error [PaisDAO][updatePais][SQLException]: " + e.getMessage());
+                System.out.println("Error [PaisDAO][updatePais][SQLException]: " + e.getMessage());
             }
         }
+        return  b;
     }
 
-    public static void deletePais(Connection conn,Pais pais) {
+    public static boolean deletePais(Connection conn, Pais pais) {
+        boolean b = false;
         PreparedStatement stmt = null;
 
         try {
@@ -65,14 +72,15 @@ public class PaisDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("PaisDAO.deletePais", ex);
+          b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
-                 System.out.println("Error [PaisDAO][deletePais][SQLException]: " + e.getMessage());
+                System.out.println("Error [PaisDAO][deletePais][SQLException]: " + e.getMessage());
             }
         }
+        return b;
     }
 
     public static List<Pais> listarPais(Connection conn) {
