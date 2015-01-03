@@ -15,7 +15,8 @@ public class EditorialDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public static void insertEditorial(Connection conn, Editorial ed) {
+    public static boolean insertEditorial(Connection conn, Editorial ed) {
+        boolean b = true;
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO editorial VALUES(?,?,?)";
@@ -26,39 +27,49 @@ public class EditorialDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("EditorialDAO.insertEditorial", ex);
+            System.out.println("Error [editorialDAO][insertEditorial][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public static void updateEditorial(Connection conn, Editorial ed) {
+    public static boolean updateEditorial(Connection conn, Editorial ed, Editorial ediOriginal) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
-            String sql = "UPDATE editorial SET "
+            String sql = "UPDATE editorial SET"
+                    + " edi_cod = ?, "
                     + "edi_nombre = ?, "
                     + "edi_pais = ? "
                     + "WHERE edi_cod = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, ed.getEdiNombre());
-            stmt.setString(2, ed.getEdiPais().getCodPais());
-            stmt.setInt(3, ed.getEdiCod());
+            stmt.setInt(1, ed.getEdiCod());
+            stmt.setString(2, ed.getEdiNombre());
+            stmt.setString(3, ed.getEdiPais().getCodPais());
+            stmt.setInt(3, ediOriginal.getEdiCod());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("EditorialDAO.updateEditorial", ex);
+            System.out.println("Error [editorialDAO][updateEditorial][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public static void deleteEditorial(Connection conn, Editorial ed) {
+    public static boolean deleteEditorial(Connection conn, Editorial ed) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "DELETE FROM editorial WHERE edi_cod = ?";
@@ -67,13 +78,16 @@ public class EditorialDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("EditorialDAO.deleteEditorial", ex);
+            System.out.println("Error [editorialDAO][deleteEditorial][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public static List<Editorial> listarEditorial(Connection conn) {
@@ -96,7 +110,8 @@ public class EditorialDAO {
                 lista.add(ed);
             }
         } catch (Exception ex) {
-            throw new RuntimeException("DAO.listar", ex);
+            System.out.println("Error [editorialDAO][listarEditorial][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
         } finally {
             try {
                 rs.close();

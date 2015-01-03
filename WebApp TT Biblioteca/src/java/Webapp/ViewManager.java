@@ -78,6 +78,40 @@ public class ViewManager implements Serializable {
     public void setConsModCurso() {
         setUrl("ResConsModCurso.xhtml");
     }
-    public void setElimCurso(){
-        setUrl("ElimCurso.xhtml");}
+
+    public void setElimCurso() {
+        setUrl("ElimCurso.xhtml");
+    }
+
+    public void setConsEditorial() {
+        setUrl("ResConsEditorial.xhtml");
+    }
+
+    public void setInsEditorial() {
+        setUrl("InsEditorial.xhtml");
+    }
+
+    public void setModEditorial() {
+        setUrl("ResModEditorial.xhtml");
+    }
+
+    public void setElimEditorial() {
+        setUrl("ResConsElimCategoria.xhtml");
+    }
+
+    public void setConsCategoria() {
+        setUrl("ResConsCategoria.xhtml");
+    }
+
+    public void setInsCategoria() {
+        setUrl("InsCategoria.xhtml");
+    }
+
+    public void setModCategoria() {
+        setUrl("ResModCategoria.xhtml");
+    }
+
+    public void setElimCategoria() {
+        setUrl("ResConsElimCategoria.xhtml");
+    }
 }

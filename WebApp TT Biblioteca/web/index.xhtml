@@ -81,14 +81,16 @@
                         <p:menuitem value="Modificar" url="#" />
                     </p:submenu>
                     <p:submenu label="Editorial" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                        <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsEditorial()}" update=":forma" />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsEditorial()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setModEditorial()}" update=":forma" />
+                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimEditorial()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="Categoría" icon="ui-icon-search">
-
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                        <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsCategoria()}" update=":forma" />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsCategoria()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setModCategoria()}" update=":forma" />
+                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimCategoria()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="País" icon="ui-icon-search">
                         <p:menuitem value="Insertar"  actionListener="#{viewmanager.setInicio()}" update=":forma"  />

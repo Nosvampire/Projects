@@ -15,8 +15,8 @@ public class CategoriaMultaDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public static void insertCategoriaMulta(Connection conn, CategoriaMulta cm) {
-
+    public static boolean insertCategoriaMulta(Connection conn, CategoriaMulta cm) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO categoria_multa VALUES(?,?,?,?)";
@@ -28,13 +28,16 @@ public class CategoriaMultaDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CategoriaMultaDAO.insertCategoriaMulta", ex);
+            System.out.println("Error [CategoriaDAO][insertCategoriaMulta][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public static void updateCategoriaMulta(Connection conn, CategoriaMulta cm) {
@@ -62,16 +65,11 @@ public class CategoriaMultaDAO {
         }
     }
 
-    public void deleteCategoriaMulta(Connection conn, CategoriaMulta cm, CategoriaMulta cm2, Copia cp) {
+    public static boolean deleteCategoriaMulta(Connection conn, CategoriaMulta cm) {
+        boolean b = false;
         PreparedStatement stmt = null;
-        PreparedStatement pstmt = null;
-        try {
-            String sqluc = "UPDATE copia SET cop_categoriaMulta = ? WHERE cop_categoriaMulta = ?";
-            pstmt = conn.prepareStatement(sqluc);
-            pstmt.setString(1, cm2.getCamCod());
-            pstmt.setString(2, cm.getCamCod());
 
-            pstmt.executeUpdate();
+        try {
 
             String sql = "DELETE FROM categoria_multa WHERE cam_cod = ?";
             stmt = conn.prepareStatement(sql);
@@ -79,17 +77,20 @@ public class CategoriaMultaDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("CategoriaMultaDAO.deleteCategoriaMulta", ex);
+            System.out.println("Error [CategoriaDAO][deleteCategoriaMulta][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
-                pstmt.close();
+
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public List<CategoriaMulta> listarCategoriaMulta() {
+    public static List<CategoriaMulta> listarCategoriaMulta(Connection conn) {
         List<CategoriaMulta> lista = new ArrayList<>();
         Statement stmt = null;
         ResultSet rs = null;

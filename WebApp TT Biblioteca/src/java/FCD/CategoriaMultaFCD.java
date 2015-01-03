@@ -9,6 +9,8 @@ import Connection.DBConnection;
 import DAO.CategoriaMultaDAO;
 import POJO.CategoriaMulta;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,13 +18,15 @@ import java.sql.Connection;
  */
 public class CategoriaMultaFCD {
 
-    public static void insertCategoriaMulta(CategoriaMulta categoriaMulta) {
+    public static boolean insertCategoriaMulta(CategoriaMulta categoriaMulta) {
+        boolean b;
         Connection conn = DBConnection.getConexion();
-        CategoriaMultaDAO.insertCategoriaMulta(conn, categoriaMulta);
+        b = CategoriaMultaDAO.insertCategoriaMulta(conn, categoriaMulta);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
     }
 
     public static void updateCategoriaMulta(CategoriaMulta categoriaMulta) {
@@ -34,12 +38,25 @@ public class CategoriaMultaFCD {
         }
     }
 
-    public static void deleteCategoriaMulta(CategoriaMulta categoriaMulta) {
+    public static boolean deleteCategoriaMulta(CategoriaMulta categoriaMulta) {
+        boolean b;
         Connection conn = DBConnection.getConexion();
-        CategoriaMultaDAO.updateCategoriaMulta(conn, categoriaMulta);
+        b = CategoriaMultaDAO.deleteCategoriaMulta(conn, categoriaMulta);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
+    }
+
+    public static List<CategoriaMulta> selectCategoriaMulta() {
+        Connection conn = DBConnection.getConexion();
+        List<CategoriaMulta> listCategoriaMulta = new ArrayList<>();
+        listCategoriaMulta = CategoriaMultaDAO.listarCategoriaMulta(conn);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return listCategoriaMulta;
     }
 }

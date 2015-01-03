@@ -69,9 +69,7 @@ public class CursoBean {
     }
 
     public void insCondicion() {
-
         Curso curso = new Curso(curCodigo, curDescripcion);
-
         boolean error = CursoFCD.insertCurso(curso);
         if (error == true) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la inserción", "");
@@ -80,13 +78,11 @@ public class CursoBean {
             FacesMessage msg = new FacesMessage("Inserción exitosa.", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-
     }
 
     public void redirigirModCurso() {
         this.curOriginal.setCurCodigo(curso.getCurCodigo());
         this.curOriginal.setCurDescripcion(curso.getCurDescripcion());
-
     }
 
     public void modCurso() {
@@ -101,7 +97,8 @@ public class CursoBean {
         }
 
     }
-     public void elimCurso() {
+
+    public void elimCurso() {
         boolean error = CursoFCD.deleteCurso(curso);
         if (error == true) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la eliminación", "");
