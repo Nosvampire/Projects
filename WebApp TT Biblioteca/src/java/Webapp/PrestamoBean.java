@@ -101,7 +101,7 @@ public class PrestamoBean {
             Date d = new Date();
             LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             java.sql.Date sqlDate = new java.sql.Date(d.getTime());
-            LocalDate dateDevolucion = date.plusDays(diasPrestamo);
+            LocalDate dateDevolucion = date.plusDays(copia.getCategoriaMulta().getCamCantDiasPrestamo());
             java.sql.Date sqlDateDevolucion = new java.sql.Date(DateTimeConverters.localDateToDate(dateDevolucion).getTime());
             Usuario usuario = new Usuario(rut, dv, null, null, null, null, null, null, null, 0, null);
             Prestamo prestamo = new Prestamo(usuario, copia, sqlDate, sqlDateDevolucion, 0, 0, null, "V");
@@ -134,5 +134,37 @@ public class PrestamoBean {
 
         this.listPrestamos = PrestamoFCD.consultarPrestamo(fechaInicioSql, fechaTerminoSql, rut);
         FacesContext.getCurrentInstance().getExternalContext().redirect("ResConsPrestamo.xhtml");
+    }
+
+    public void consultarPrestamoMod() throws IOException {
+        java.sql.Date fechaInicioSql = new java.sql.Date(fechaInicio.getTime());
+        java.sql.Date fechaTerminoSql = new java.sql.Date(fechaTermino.getTime());
+        this.listPrestamos = PrestamoFCD.consultarPrestamo(fechaInicioSql, fechaTerminoSql, rut);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("ResModPrestamo.xhtml");
+    }
+
+    public void selectPrestamo(Prestamo prestamo) {
+        this.prestamo = prestamo;
+    }
+
+    public void modPrestamo() {
+//        prestamo pais2 = new Pais();
+//        List<Pais> lPais = PaisFCD.listPais();
+//        for (int i = 0; i < lPais.size(); i++) {
+//            if (lPais.get(i).getCodPais().equals(codPais)) {
+//                pais2.setNomPais(lPais.get(i).getNomPais());
+//            }
+//        }
+//        pais2.setCodPais(codPais);
+//        editorial.setEdiPais(pais2);
+//        boolean error = PaisFCD.updateEditorial(editorial, ediOriginal);
+//        if (error == true) {
+//            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la modificación", "");
+//            FacesContext.getCurrentInstance().addMessage(null, message);
+//        } else {
+//            FacesMessage msg = new FacesMessage("Modificación exitosa.", "");
+//            FacesContext.getCurrentInstance().addMessage(null, msg);
+//        }
+
     }
 }

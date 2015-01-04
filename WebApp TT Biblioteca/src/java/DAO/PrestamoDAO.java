@@ -117,13 +117,15 @@ public class PrestamoDAO {
         ResultSet rs = null;
         try {
 
-            String sql = "SELECT * FROM prestamo p,usuario u, copia c "
-                    + "WHERE p.pre_rut = u.usr_rut AND "
+            String sql = "SELECT * FROM prestamo p,usuario u, copia c, titulo t"
+                    + " WHERE p.pre_rut = u.usr_rut AND "
                     + "p.pre_dv = u.usr_dv AND "
                     + "p.pre_titulo = c.cop_titulo AND "
-                    + "p.pre_copia = c.cop_cod"
+                    + "p.pre_copia = c.cop_cod AND"
+                    + " t.tit_cod = c.cop_titulo"
                     + " AND pre_fecha BETWEEN ? AND ?"
                     + " AND pre_rut = ?";
+            System.out.println("sql : "+sql);
             stmt = conn.prepareStatement(sql);
             stmt.setDate(1, fechaInicio);
             stmt.setDate(2, fechaTermino);
@@ -140,6 +142,7 @@ public class PrestamoDAO {
                 // Falta completar de ser necesario
 
                 // Recoleccion datos Copia
+                cop.setCopNombre(rs.getString("tit_nombre"));
                 cop.setCopTitulo(rs.getInt("cop_titulo"));
                 cop.setCopCod(rs.getInt("cop_cod"));
                 // Falta completar de ser necesario

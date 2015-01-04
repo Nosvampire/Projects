@@ -2,50 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html  xmlns="http://www.w3.org/1999/xhtml"
        xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:p="http://primefaces.org/ui"
-       xmlns:f="http://java.sun.com/jsf/core">
+       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta name="viewport" content="width=device-width"/>
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
         <link rel="stylesheet"  href="css/global.css"/>
     </h:head>
-    <h:body >
+    <h:body>
 
         <h:form enctype="multipart/form-data">  
             <p:growl id="messages" showDetail="true"  />  
 
-            <p:panel header="Insertar País"  id="panel"  style="margin-bottom:10px; font-size: large" >
+            <p:panel header="Consultar Prestamo"  id="panel"  style="margin-bottom:10px; font-size: large">
 
-                <h:panelGrid columns="4">
+                <h:panelGrid columns="2">
 
-                    <h:outputLabel 
-                        styleClass="output--global"
-                        style="margin-left: 15px;margin-right: 15px"
+                    <p:outputLabel style="margin-right:  40px" styleClass="calendar--global" for="inicio" value="Inicio:" />
+                    <p:calendar styleClass="calendar--global" id="inicio" value="#{prestamobean.fechaInicio}" locale="es" pattern="dd/MM/yyyy"/>
 
-                        value="Código:"/>
-
-                    <p:inputMask 
-                        id="apP"
-                        style="margin-left: 15px;margin-right: 48px"
-                        value="#{paisbean.codPais}" 
-                        mask="aa"
-                        /> 
-                    <h:outputLabel 
-                        styleClass="output--global"
-                        style="margin-left: 15px;margin-right: 15px"
-
-                        value="País:"/>
-
-                    <p:inputText 
-                        id="apM"
-                        style="margin-left: 15px;margin-right: 15px"
-                        value="#{paisbean.nomPais}"/>
-
-          
-
-
-
-
+                    <p:outputLabel style="margin-right:  20px" styleClass="calendar--global" for="termino" value="Termino:" />
+                    <p:calendar styleClass="calendar--global" id="termino" value="#{prestamobean.fechaTermino}" locale="es" pattern="dd/MM/yyyy" />
+                    <p:outputLabel style="margin-right:  40px" styleClass="calendar--global"  value="Rut:" />
+                    <p:inputText value="#{prestamobean.rut}" />
                 </h:panelGrid>
                 <br/>
                 <h:panelGrid columns="4"  >
@@ -70,7 +48,7 @@
                     value=" Aceptar"
                     icon="ui-icon-check"
                     style="margin-right:  20px; margin-left: 10px"
-                    actionListener="#{paisbean.insPais()}"/>
+                    actionListener="#{prestamobean.consultarPrestamo()}"/>
 
             </h:panelGrid>
 

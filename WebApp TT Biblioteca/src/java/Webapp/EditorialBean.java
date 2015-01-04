@@ -99,6 +99,7 @@ public class EditorialBean {
 
     public void consultarEditorial() {
         listEditorial = EditorialFCD.selectEditorial();
+        this.listPais = PaisFCD.listResultadoBusqueda();
     }
 
     public void cargaPais() {

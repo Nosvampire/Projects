@@ -72,6 +72,10 @@
 
                                 <h:outputLabel value="#{copia.categoriaMulta.camDescripcion}"/>
                             </p:column>
+                            <p:column headerText="Días">
+
+                                <h:outputLabel value="#{copia.categoriaMulta.camCantDiasPrestamo}"/>
+                            </p:column>
 
                             <p:column>
                                 <p:commandButton value="Pedir Copia" ajax="false" global="true" actionListener="#{prestamobean.añadirPrestamo(copia)}">
@@ -84,8 +88,7 @@
 
                         </p:dataTable>
                         <h:panelGrid  columns="2">
-                            <p:outputLabel value="Dias de prestamo:"/>
-                            <p:inputText value="#{prestamobean.diasPrestmo}"/>
+
                             <p:outputLabel value="Rut:"/>
                             <p:inputText value="#{prestamobean.rut}"/>
                             <p:outputLabel value="Dígito verificador:"/>

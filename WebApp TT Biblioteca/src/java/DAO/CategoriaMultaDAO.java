@@ -3,7 +3,6 @@ package DAO;
 // CRUD listo
 import Connection.DBConnection;
 import POJO.CategoriaMulta;
-import POJO.Copia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,17 +18,17 @@ public class CategoriaMultaDAO {
         boolean b = false;
         PreparedStatement stmt = null;
         try {
-            String sql = "INSERT INTO categoria_multa VALUES(?,?,?,?)";
+            String sql = "INSERT INTO categoria_multa VALUES(?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, cm.getCamCod());
             stmt.setString(2, cm.getCamNombre());
             stmt.setString(3, cm.getCamDescripcion());
-            stmt.setInt(4, cm.getCamValorMultaDia());
+            stmt.setInt(4, cm.getCamCantDiasPrestamo());
+            stmt.setInt(5, cm.getCamValorMultaDia());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
             System.out.println("Error [CategoriaDAO][insertCategoriaMulta][SQLException]: " + ex.getMessage());
-            ex.printStackTrace();
             b = true;
         } finally {
             try {
@@ -40,27 +39,28 @@ public class CategoriaMultaDAO {
         return b;
     }
 
-    public static boolean updateCategoriaMulta(Connection conn, CategoriaMulta cm, CategoriaMulta categoriaMultaOri) {
-        boolean b = false;
+    public static boolean updateCategoriaMulta(Connection conn, CategoriaMulta cm, CategoriaMulta cmOriginal) {
         PreparedStatement stmt = null;
+        boolean b = false;
         try {
             String sql = "UPDATE categoria_multa SET "
-                    + "cam_nombre = ?,"
-                    + " cam_cod = ?, "
+                    + "cam_cod = ?, "
+                    + "cam_nombre = ?, "
                     + "cam_descripcion = ?, "
+                    + "cam_cantDiasPrestamo = ?, "
                     + "cam_valorMultaDia = ? "
                     + "WHERE cam_cod = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, cm.getCamNombre());
+            stmt.setString(1, cm.getCamCod());
             stmt.setString(2, cm.getCamNombre());
             stmt.setString(3, cm.getCamDescripcion());
-            stmt.setInt(4, cm.getCamValorMultaDia());
-            stmt.setString(5, categoriaMultaOri.getCamCod());
+            stmt.setInt(4, cm.getCamCantDiasPrestamo());
+            stmt.setInt(5, cm.getCamValorMultaDia());
+            stmt.setString(6, cmOriginal.getCamCod());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            System.out.println("Error [CategoriaDAO][updateCategoriaMulta][SQLException]: " + ex.getMessage());
-            ex.printStackTrace();
+            System.out.println("Error [CategoriaMultaDAO][updateCategoriaMulta][SQLException]: " + ex.getMessage());
             b = true;
         } finally {
             try {
@@ -84,7 +84,6 @@ public class CategoriaMultaDAO {
             stmt.executeUpdate();
         } catch (Exception ex) {
             System.out.println("Error [CategoriaDAO][deleteCategoriaMulta][SQLException]: " + ex.getMessage());
-            ex.printStackTrace();
             b = true;
         } finally {
             try {
@@ -109,6 +108,7 @@ public class CategoriaMultaDAO {
                 cm.setCamCod(rs.getString("cam_cod"));
                 cm.setCamNombre(rs.getString("cam_nombre"));
                 cm.setCamDescripcion(rs.getString("cam_descripcion"));
+                cm.setCamCantDiasPrestamo(rs.getInt("cam_cantDiasPrestamo"));
                 cm.setCamValorMultaDia(rs.getInt("cam_valorMultaDia"));
 
                 lista.add(cm);

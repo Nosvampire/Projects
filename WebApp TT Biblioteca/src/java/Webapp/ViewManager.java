@@ -88,7 +88,7 @@ public class ViewManager implements Serializable {
     }
 
     public void setElimEditorial() {
-        setUrl("ResConsElimCategoria.xhtml");
+        setUrl("ResConsElimEditorial.xhtml");
     }
 
     public void setConsCategoria() {
@@ -137,6 +137,9 @@ public class ViewManager implements Serializable {
 
     public void setElimAutor() {
         setUrl("ConsElimAutor.xhtml");
+    }
+      public void setModPrestamo() {
+        setUrl("ConsModPrestamo.xhtml");
     }
 
 }

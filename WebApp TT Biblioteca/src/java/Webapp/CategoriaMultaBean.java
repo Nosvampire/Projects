@@ -27,6 +27,7 @@ public class CategoriaMultaBean {
     private CategoriaMulta categoriaMultaOri = new CategoriaMulta();
     private String camCod;
     private String camDescripcion;
+    private int camCantDiasPrestamo;
     private int valorMulta;
 
     public String getCamNombre() {
@@ -77,6 +78,14 @@ public class CategoriaMultaBean {
         this.camDescripcion = camDescripcion;
     }
 
+    public int getCamCantDiasPrestamo() {
+        return camCantDiasPrestamo;
+    }
+
+    public void setCamCantDiasPrestamo(int camCantDiasPrestamo) {
+        this.camCantDiasPrestamo = camCantDiasPrestamo;
+    }
+
     public int getValorMulta() {
         return valorMulta;
     }
@@ -84,13 +93,9 @@ public class CategoriaMultaBean {
     public void setValorMulta(int valorMulta) {
         this.valorMulta = valorMulta;
     }
-
-    public void consultarCategoriaMulta() {
-        this.listCategoria = CategoriaMultaFCD.selectCategoriaMulta();
-    }
-
-    public void selectCategoriaMulta(CategoriaMulta categoria) {
-        this.categoriaMulta = categoria;
+    
+    public void consultarCategoriaMulta(){
+        listCategoria = CategoriaMultaFCD.selectCategoriaMulta();
     }
 
     public void elimCategoriaMulta() {
@@ -108,6 +113,7 @@ public class CategoriaMultaBean {
         categoriaMulta.setCamCod(camCod);
         categoriaMulta.setCamNombre(camNombre);
         categoriaMulta.setCamDescripcion(camDescripcion);
+        categoriaMulta.setCamCantDiasPrestamo(camCantDiasPrestamo);
         categoriaMulta.setCamValorMultaDia(valorMulta);
 
         boolean error = CategoriaMultaFCD.insertCategoriaMulta(categoriaMulta);
@@ -118,27 +124,28 @@ public class CategoriaMultaBean {
             FacesMessage msg = new FacesMessage("Inserción exitosa.", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-
     }
-
-    public void redirigirModCondicion() {
-        this.categoriaMultaOri.setCamCod(categoriaMulta.getCamCod());
-        this.categoriaMultaOri.setCamDescripcion(categoriaMulta.getCamDescripcion());
-        this.categoriaMultaOri.setCamNombre(categoriaMulta.getCamNombre());
-        this.categoriaMultaOri.setCamValorMultaDia(categoriaMulta.getCamValorMultaDia());
-       
-    }
-     public void modCategoria() {
-
+    
+    public void modCategoriaMulta(){
         boolean error = CategoriaMultaFCD.updateCategoriaMulta(categoriaMulta, categoriaMultaOri);
-        if (error == true) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la modificación", "");
+        if(error == true){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error en la Modificacion", "");
             FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
-            FacesMessage msg = new FacesMessage("Modificación exitosa.", "");
+        }else{
+            FacesMessage msg = new FacesMessage("Modificacion Exitosa.","");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-
     }
-
+    
+    public void selectCategoriaMulta(CategoriaMulta c) {
+        this.categoriaMulta = c;
+    }
+    
+    public void redirigirModCategoriaMulta(){
+        this.categoriaMultaOri.setCamCod(categoriaMulta.getCamCod());
+        this.categoriaMultaOri.setCamNombre(categoriaMulta.getCamNombre());
+        this.categoriaMultaOri.setCamDescripcion(categoriaMulta.getCamDescripcion());
+        this.categoriaMultaOri.setCamCantDiasPrestamo(categoriaMulta.getCamCantDiasPrestamo());
+        this.categoriaMultaOri.setCamValorMultaDia(categoriaMulta.getCamValorMultaDia());   
+    }
 }

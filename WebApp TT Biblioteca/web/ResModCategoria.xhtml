@@ -36,6 +36,9 @@
                             <p:column headerText="Descripción">
                                 <p:outputLabel value="#{categoria.camDescripcion}"/>
                             </p:column>
+                            <p:column headerText="Días de Prestamo">
+                                <p:outputLabel value="#{categoria.camCantDiasPrestamo}"/>
+                            </p:column>
                             <p:column headerText="Valor Multa">
                                 <p:outputLabel value="#{categoria.camValorMultaDia}"/>
                             </p:column>
@@ -46,7 +49,7 @@
                                                  update=":form1:display"
                                                  global="true">
                                     <f:actionListener binding="#{categoriamultabean.selectCategoriaMulta(categoria)}"/>
-                                    <f:actionListener binding="#{categoriamultabean.redirigirModCondicion()}"/>
+                                    <f:actionListener binding="#{categoriamultabean.redirigirModCategoriaMulta()}"/>
 
 
                                 </p:commandButton>
@@ -63,12 +66,16 @@
                     <p:growl id="messages"   />  
                     <p:panelGrid id="display" columns="2" columnClasses="label,value">
                         <h:outputText value="Código" />
-                        <h:inputText value="#{condicionbean.condicion.conCodigo}"/>
-
-
+                        <p:inputMask  value="#{categoriamultabean.categoriaMulta.camCod}" mask="aaa" />
+                        <h:outputText value="Categoría"/>
+                        <h:inputText value="#{categoriamultabean.categoriaMulta.camNombre}"/>
                         <h:outputText value="Descripción"/>
-                        <h:inputText value="#{condicionbean.condicion.conDescripcion}"/>
-                        <p:commandButton value="Modificar" ajax="false" global="true" actionListener="#{condicionbean.modCondicion()}">
+                        <h:inputText value="#{categoriamultabean.categoriaMulta.camDescripcion}"/>
+                        <h:outputText value="Días Prestamo"/>
+                        <h:inputText value="#{categoriamultabean.categoriaMulta.camCantDiasPrestamo}"/>
+                        <h:outputText value="Valor Multa"/>
+                        <h:inputText value="#{categoriamultabean.categoriaMulta.camValorMultaDia}"/>
+                        <p:commandButton value="Modificar" ajax="false" global="true" actionListener="#{categoriamultabean.modCategoriaMulta()}">
                         </p:commandButton>
                     </p:panelGrid>
                 </h:form>

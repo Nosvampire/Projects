@@ -98,12 +98,7 @@
                         <p:menuitem value="Modificar" actionListener="#{viewmanager.setModPais()}" update=":forma" />
                         <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimPais()}" update=":forma" />
                     </p:submenu>
-                    <p:submenu label="Condición" icon="ui-icon-search">
-                        <p:menuitem value="Consultar"  actionListener="#{viewmanager.setConsEstado()}" update=":forma"  />
-                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsEstado()}" update=":forma" />
-                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setModEstado()}" update=":forma" />
-                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimEstado()}" update=":forma" />
-                    </p:submenu>
+                
                     <p:submenu label="Autor" icon="ui-icon-search">
                        
                             <p:menuitem value="Consultar"  actionListener="#{viewmanager.setConsAutor()}" update=":forma"  />
@@ -115,8 +110,7 @@
                     </p:submenu>
                     <p:submenu label="Préstamo" icon="ui-icon-search">
                         <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarPrestamo()}" update=":forma" />
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                         <p:menuitem value="Entregar" actionListener="#{viewmanager.setModPrestamo()}" update=":forma" />
                     </p:submenu>
 
                 </p:submenu>
