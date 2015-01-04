@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package FCD;
 
 import Connection.DBConnection;
@@ -22,33 +21,41 @@ import javax.faces.model.SelectItem;
  * @author Niko
  */
 public class DeweyFCD {
-      public static void insertDewey(Dewey dewey) {
+
+    public static boolean insertDewey(Dewey dewey) {
+        boolean b;
         Connection conn = DBConnection.getConexion();
-        DeweyDAO.insertDewey(conn, dewey);
+        b = DeweyDAO.insertDewey(conn, dewey);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
     }
 
-    public static void updateDewey(Dewey dewey) {
+    public static boolean updateDewey(Dewey dewey, Dewey deweyOri) {
+        boolean b;
         Connection conn = DBConnection.getConexion();
-        DeweyDAO.updateDewey(conn, dewey);
+        b = DeweyDAO.updateDewey(conn, dewey, deweyOri);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
     }
 
-    public static void deleteDewey(Dewey dewey) {
+    public static boolean deleteDewey(Dewey dewey) {
+        boolean b ;
         Connection conn = DBConnection.getConexion();
-        DeweyDAO.deleteDewey(conn, dewey);
+      b=  DeweyDAO.deleteDewey(conn, dewey);
         try {
             conn.close();
         } catch (Exception e) {
         }
+        return b;
     }
-      public static List<SelectItem> listResultadoBusqueda() {
+
+    public static List<SelectItem> listResultadoBusqueda() {
         Connection conn = DBConnection.getConexion();
         ArrayList<SelectItem> r = new ArrayList<SelectItem>();
         for (Dewey rap : DeweyFCD.listDewey()) {

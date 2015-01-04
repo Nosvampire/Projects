@@ -14,7 +14,8 @@ public class DeweyDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public static void insertDewey(Connection conn,Dewey dw) {
+    public static boolean insertDewey(Connection conn, Dewey dw) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO dewey VALUES(?,?,?)";
@@ -25,38 +26,48 @@ public class DeweyDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("DeweyDAO.insertDewey", ex);
+            System.out.println("Error [CursoDAO][insertCurso][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public static void updateDewey(Connection conn,Dewey dw) {
+    public static boolean updateDewey(Connection conn, Dewey dw, Dewey deweyOri) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
-            String sql = "UPDATE dewey SET dw_categoria = ? WHERE dw_cod = ?";
+            String sql = "UPDATE dewey SET dw_categoria = ?, dw_cod = ? WHERE dw_cod = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, dw.getDwCategoria());
             stmt.setInt(2, dw.getDwCod());
 
+            stmt.setInt(3, deweyOri.getDwCod());
+
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("DeweyDAO.updateDewey", ex);
+            System.out.println("Error [CursoDAO][insertCurso][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
 //    No se si se podria eliminar el codigo ... 
 //    en mi opinion no .. 
 //    pero por si acaso lo dejo igual..
-    public static void deleteDewey(Connection conn,Dewey dw) {
+    public static boolean deleteDewey(Connection conn, Dewey dw) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "DELETE FROM dewey WHERE dw_cod = ?";
@@ -65,13 +76,16 @@ public class DeweyDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("DeweyDAO.deleteDewey", ex);
+            System.out.println("Error [CursoDAO][insertCurso][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public static List<Dewey> listarDewey(Connection conn) {
