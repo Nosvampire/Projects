@@ -35,6 +35,14 @@ public class ViewManager implements Serializable {
         setUrl("ConsTitulo.xhtml");
     }
 
+    public void setInsTitulo() {
+        setUrl("InsTitulo.xhtml");
+    }
+
+    public void setModTitulo() {
+        setUrl("ConsModTitulo.xhtml");
+    }
+
     public void setConsultarCurso() {
         setUrl("ResConsCurso.xhtml");
     }
@@ -138,8 +146,25 @@ public class ViewManager implements Serializable {
     public void setElimAutor() {
         setUrl("ConsElimAutor.xhtml");
     }
-      public void setModPrestamo() {
+
+    public void setModPrestamo() {
         setUrl("ConsModPrestamo.xhtml");
+    }
+
+    public void setConsDewey() {
+        setUrl("ResConsDewey.xhtml");
+    }
+
+    public void setInsDewey() {
+        setUrl("InsDewey.xhtml");
+    }
+
+    public void setModDewey() {
+        setUrl("ResModDewey.xhtml");
+    }
+
+    public void setElimDewey() {
+        setUrl("ResConsElimDewey.xhtml");
     }
 
 }

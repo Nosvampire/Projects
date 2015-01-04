@@ -16,5 +16,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "deweybean")
 @SessionScoped
 public class DeweyBean {
+    private int dwCod;
+    private String dwCategoria;
     
 }

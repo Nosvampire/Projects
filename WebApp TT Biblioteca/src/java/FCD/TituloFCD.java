@@ -32,4 +32,26 @@ public class TituloFCD {
         }
         return listResultadoBusqueda;
     }
+      public static boolean insertaTitulo(Titulo titulo) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = TituloDAO.insertTitulo(conn, titulo);
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error [PaisFCD][listPais][SQLException]: " + e.getMessage());
+        }
+        return b;
+
+    }
+       public static boolean updateTitulo(Titulo titulo, Titulo tituloOri) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = TituloDAO.updateTitulo(conn, titulo, tituloOri);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return b;
+    }
 }

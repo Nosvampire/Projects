@@ -77,8 +77,8 @@
                     </p:submenu>
                     <p:submenu label="Títulos" icon="ui-icon-search">
                         <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsultarTitulo()}" update=":forma"   />
-                        <p:menuitem value="Insertar" url="#" />
-                        <p:menuitem value="Modificar" url="#" />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsTitulo()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setModTitulo()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="Editorial" icon="ui-icon-search">
                         <p:menuitem value="Consultar" actionListener="#{viewmanager.setConsEditorial()}" update=":forma" />
@@ -93,6 +93,12 @@
                         <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimCategoria()}" update=":forma" />
                     </p:submenu>
                     <p:submenu label="País" icon="ui-icon-search">
+                        <p:menuitem value="Consultar"  actionListener="#{viewmanager.setConsPais()}" update=":forma"  />
+                        <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsPais()}" update=":forma" />
+                        <p:menuitem value="Modificar" actionListener="#{viewmanager.setModPais()}" update=":forma" />
+                        <p:menuitem value="Eliminar" actionListener="#{viewmanager.setElimPais()}" update=":forma" />
+                    </p:submenu>
+                       <p:submenu label="Dewey" icon="ui-icon-search">
                         <p:menuitem value="Consultar"  actionListener="#{viewmanager.setConsPais()}" update=":forma"  />
                         <p:menuitem value="Insertar" actionListener="#{viewmanager.setInsPais()}" update=":forma" />
                         <p:menuitem value="Modificar" actionListener="#{viewmanager.setModPais()}" update=":forma" />

@@ -13,7 +13,8 @@ public class TituloDAO {
 
     Connection conn = DBConnection.getConexion();
 
-    public void insertTitulo(Titulo tt) {
+    public static boolean insertTitulo(Connection conn,Titulo tt) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO titulo VALUES(?,?,?,?)";
@@ -25,38 +26,47 @@ public class TituloDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("TituloDAO.insertTitulo", ex);
+            System.out.println("Error [TituloDAO][inserertTitulo][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
-    public void updateTitulo(Titulo tt) {
+    public static boolean updateTitulo(Connection conn,Titulo tt,Titulo tituloOri) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
-            String sql = "UPDATE titulo SET "
+            String sql = "UPDATE titulo SET"
+                    + " tit_cod = ?, "
                     + "tit_nombre = ?, "
                     + "tit_tipo = ?, "
                     + "tit_dewey = ? "
                     + "WHERE tit_cod = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, tt.getTitNombre());
-            stmt.setString(2, tt.getTitTipo());
-            stmt.setInt(3, tt.getTitDewey().getDwCod());
-            stmt.setInt(4, tt.getTitCod());
+             stmt.setInt(1, tt.getTitCod());
+            stmt.setString(2, tt.getTitNombre());
+            stmt.setString(3, tt.getTitTipo());
+            stmt.setInt(4, tt.getTitDewey().getDwCod());
+            stmt.setInt(5, tituloOri.getTitCod());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("TituloDAO.updateTitulo", ex);
+            System.out.println("Error [TituloDAO][updTitulo][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return  b;
     }
 
     public void deleteTitulo(Titulo tt) {
