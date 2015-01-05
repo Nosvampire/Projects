@@ -16,8 +16,8 @@ public class PaisBean {
     private String codPais;
     private String nomPais;
     private List<Pais> listPais;
-    private Pais pais;
-    private Pais paisOri;
+    private Pais pais = new Pais();
+    private Pais paisOri = new Pais();
 
     public String getCodPais() {
         return codPais;

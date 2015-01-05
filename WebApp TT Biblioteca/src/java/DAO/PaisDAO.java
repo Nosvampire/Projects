@@ -17,12 +17,13 @@ public class PaisDAO {
         try {
             String sql = "INSERT INTO pais VALUES (?,?)";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, pais.getCodPais());
+            stmt.setString(1, pais.getCodPais().toUpperCase());
             stmt.setString(2, pais.getNomPais());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("PaisDAO.insertPais", ex);
+            b = true;
+
         } finally {
             try {
                 stmt.close();
@@ -34,8 +35,8 @@ public class PaisDAO {
         return b;
     }
 
-    public static boolean updatePais(Connection conn, Pais pais,Pais paisOri) {
-        boolean b = true;
+    public static boolean updatePais(Connection conn, Pais pais, Pais paisOri) {
+        boolean b = false;
         PreparedStatement stmt = null;
 
         try {
@@ -45,12 +46,14 @@ public class PaisDAO {
                     + " WHERE cod_pais = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, pais.getNomPais());
-            stmt.setString(2, pais.getCodPais());
-             stmt.setString(3, paisOri.getCodPais());
+            stmt.setString(2, pais.getCodPais().toUpperCase());
+            stmt.setString(3, paisOri.getCodPais());
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-         b = true;
+            System.out.println("Error [PaisDAO][updPais[SQLException]: " + ex.getMessage());
+            b = true;
+            ex.printStackTrace();
         } finally {
             try {
                 stmt.close();
@@ -58,7 +61,7 @@ public class PaisDAO {
                 System.out.println("Error [PaisDAO][updatePais][SQLException]: " + e.getMessage());
             }
         }
-        return  b;
+        return b;
     }
 
     public static boolean deletePais(Connection conn, Pais pais) {
@@ -72,7 +75,9 @@ public class PaisDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-          b = true;
+            System.out.println("Error [CondicionDAO][deleteCondicion][SQLException]: " + ex.getMessage());
+            b = true;
+            ex.printStackTrace();
         } finally {
             try {
                 stmt.close();

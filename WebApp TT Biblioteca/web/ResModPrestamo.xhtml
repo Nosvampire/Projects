@@ -21,7 +21,7 @@
                 <p:growl id="messages"   />  
                 <div align="left">
 
-                    <h:panelGroup id="contenedor" class="wrapper" layout="block" style="width:900px">
+                    <h:panelGroup id="contenedor" class="wrapper" layout="block" >
 
                         <p:dataTable  var="prestamo" value="#{prestamobean.listPrestamos}"  rows="6" 
                                       paginator="true"  
@@ -56,6 +56,7 @@
                                                  global="true">
                                     <f:actionListener binding="#{prestamobean.selectPrestamo(prestamo)}"/>
                                 </p:commandButton>
+                            </p:column>
                         </p:dataTable>
                     </h:panelGroup>
 

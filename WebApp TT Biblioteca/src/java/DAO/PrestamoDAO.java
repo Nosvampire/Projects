@@ -5,12 +5,11 @@ import Connection.DBConnection;
 import POJO.Copia;
 import POJO.Prestamo;
 import POJO.Usuario;
-import Webapp.LoginBean;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +27,11 @@ public class PrestamoDAO {
             stmt.setString(2, pre.getUsuario().getUsrDv());
             stmt.setInt(3, pre.getCopia().getCopTitulo());
             stmt.setInt(4, pre.getCopia().getCopCod());
-            stmt.setDate(5, pre.getPreFecha());
-            stmt.setDate(6, pre.getPreFechaDevolucion());
+            stmt.setDate(5, (Date) pre.getPreFecha());
+            stmt.setDate(6, (Date) pre.getPreFechaDevolucion());
             stmt.setInt(7, pre.getPreValorCancelado());
             stmt.setInt(8, pre.getPreMulta());
-            stmt.setDate(9, pre.getPreFechaDevEfectiva());
+            stmt.setDate(9, (Date) pre.getPreFechaDevEfectiva());
             stmt.setString(10, pre.getPreVigencia());
 
             stmt.executeUpdate();
@@ -63,10 +62,10 @@ public class PrestamoDAO {
                     + "pre_titulo = ? AND "
                     + "pre_copia = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setDate(1, pre.getPreFechaDevolucion());
+            stmt.setDate(1, (Date) pre.getPreFechaDevolucion());
             stmt.setInt(2, pre.getPreValorCancelado());
             stmt.setInt(3, pre.getPreMulta());
-            stmt.setDate(4, pre.getPreFechaDevEfectiva());
+            stmt.setDate(4, (Date) pre.getPreFechaDevEfectiva());
             stmt.setString(5, pre.getPreVigencia());
             stmt.setInt(6, pre.getUsuario().getUsrRut());
             stmt.setString(7, pre.getUsuario().getUsrDv());
@@ -98,7 +97,7 @@ public class PrestamoDAO {
             stmt.setString(2, pre.getUsuario().getUsrDv());
             stmt.setInt(3, pre.getCopia().getCopTitulo());
             stmt.setInt(4, pre.getCopia().getCopCod());
-            stmt.setDate(5, pre.getPreFecha());
+            stmt.setDate(5, (Date) pre.getPreFecha());
 
             stmt.executeUpdate();
         } catch (Exception ex) {

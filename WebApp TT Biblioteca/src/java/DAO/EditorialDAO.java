@@ -16,7 +16,7 @@ public class EditorialDAO {
     Connection conn = DBConnection.getConexion();
 
     public static boolean insertEditorial(Connection conn, Editorial ed) {
-        boolean b = true;
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "INSERT INTO editorial VALUES(?,?,?)";
@@ -52,7 +52,7 @@ public class EditorialDAO {
             stmt.setInt(1, ed.getEdiCod());
             stmt.setString(2, ed.getEdiNombre());
             stmt.setString(3, ed.getEdiPais().getCodPais());
-            stmt.setInt(3, ediOriginal.getEdiCod());
+            stmt.setInt(4, ediOriginal.getEdiCod());
 
             stmt.executeUpdate();
         } catch (Exception ex) {

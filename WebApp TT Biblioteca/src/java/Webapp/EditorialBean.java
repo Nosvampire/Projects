@@ -31,7 +31,7 @@ public class EditorialBean {
     private String nombre;
     private String codPais;
     private List<SelectItem> listPais;
-    private Pais pais;
+    private Pais pais = new Pais();
 
     public Pais getPais() {
         return pais;

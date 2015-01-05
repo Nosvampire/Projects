@@ -97,7 +97,10 @@ public class PrestamoBean {
 
     public void añadirPrestamo(Copia copia) {
         boolean b = UsuarioFCD.checkEstadoUsuario(rut, dv);
-        if (b == true) {
+        if ("Prestado".equals(copia.getCondicion().getConDescripcion())) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Copia ya prestada ", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else if (b == true) {
             Date d = new Date();
             LocalDate date = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             java.sql.Date sqlDate = new java.sql.Date(d.getTime());
