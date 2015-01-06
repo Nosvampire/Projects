@@ -33,11 +33,12 @@ public class PrestamoBean {
 
     private List<Prestamo> listPrestamos;
     private int diasPrestamo;
-    private Prestamo prestamo;
+    private Prestamo prestamo = new Prestamo();
     private int rut;
     private String dv;
     private Date fechaInicio;
     private Date fechaTermino;
+    private Prestamo prestamoOri = new Prestamo();
 
     public List<Prestamo> getListPrestamos() {
         return listPrestamos;
@@ -151,23 +152,15 @@ public class PrestamoBean {
     }
 
     public void modPrestamo() {
-//        prestamo pais2 = new Pais();
-//        List<Pais> lPais = PaisFCD.listPais();
-//        for (int i = 0; i < lPais.size(); i++) {
-//            if (lPais.get(i).getCodPais().equals(codPais)) {
-//                pais2.setNomPais(lPais.get(i).getNomPais());
-//            }
-//        }
-//        pais2.setCodPais(codPais);
-//        editorial.setEdiPais(pais2);
-//        boolean error = PaisFCD.updateEditorial(editorial, ediOriginal);
-//        if (error == true) {
-//            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la modificación", "");
-//            FacesContext.getCurrentInstance().addMessage(null, message);
-//        } else {
-//            FacesMessage msg = new FacesMessage("Modificación exitosa.", "");
-//            FacesContext.getCurrentInstance().addMessage(null, msg);
-//        }
+   
+        boolean error = PrestamoFCD.updatePrestamo(prestamo, prestamoOri);
+        if (error == true) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la modificación", "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            FacesMessage msg = new FacesMessage("Modificación exitosa.", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
 
     }
 }

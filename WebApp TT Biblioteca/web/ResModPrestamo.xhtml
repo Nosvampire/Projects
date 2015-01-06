@@ -70,7 +70,7 @@
                         <p:calendar styleClass="calendar--global"  value="#{prestamobean.prestamo.preFechaDevolucion}" locale="es" pattern="dd/MM/yyyy" />
                         <h:outputText value="Devolución Efectiva"/>
                         <p:calendar styleClass="calendar--global"  value="#{prestamobean.prestamo.preFechaDevEfectiva}" locale="es" pattern="dd/MM/yyyy" />
-                        <p:commandButton value="Modificar" ajax="false" global="true" actionListener="#{editorialbean.modEditorial()}">
+                        <p:commandButton value="Modificar" ajax="false" global="true" actionListener="#{prestamobean.modPrestamo()}">
                         </p:commandButton>
                     </p:panelGrid>
                 </h:form>

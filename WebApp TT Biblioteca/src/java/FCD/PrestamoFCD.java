@@ -44,4 +44,14 @@ public class PrestamoFCD {
         }
         return listResultado;
     }
+      public static boolean updatePrestamo(Prestamo prestamo, Prestamo presOriginal) {
+        boolean b;
+        Connection conn = DBConnection.getConexion();
+        b = PrestamoDAO.updatePrestamo(conn, prestamo, presOriginal);
+        try {
+            conn.close();
+        } catch (Exception e) {
+        }
+        return b;
+    }
 }

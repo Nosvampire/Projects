@@ -38,7 +38,7 @@ public class PrestamoDAO {
         } catch (SQLException ex) {
             error = true;
             System.out.println("Error [PrestamoDAO][insertPrestamo][SQLException]: " + ex.getMessage());
-            
+
         } finally {
             try {
                 stmt.close();
@@ -48,7 +48,8 @@ public class PrestamoDAO {
         return error;
     }
 
-    public void updatePrestamo(Prestamo pre) {
+    public static boolean updatePrestamo(Connection conn, Prestamo pre, Prestamo prestamoOri) {
+        boolean b = false;
         PreparedStatement stmt = null;
         try {
             String sql = "UPDATE prestamo SET "
@@ -62,10 +63,10 @@ public class PrestamoDAO {
                     + "pre_titulo = ? AND "
                     + "pre_copia = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setDate(1, (Date) pre.getPreFechaDevolucion());
+            stmt.setDate(1, new java.sql.Date(pre.getPreFechaDevolucion().getTime()));
             stmt.setInt(2, pre.getPreValorCancelado());
             stmt.setInt(3, pre.getPreMulta());
-            stmt.setDate(4, (Date) pre.getPreFechaDevEfectiva());
+            stmt.setDate(4, new java.sql.Date(pre.getPreFechaDevEfectiva().getTime()));
             stmt.setString(5, pre.getPreVigencia());
             stmt.setInt(6, pre.getUsuario().getUsrRut());
             stmt.setString(7, pre.getUsuario().getUsrDv());
@@ -74,13 +75,16 @@ public class PrestamoDAO {
 
             stmt.executeUpdate();
         } catch (Exception ex) {
-            throw new RuntimeException("PrestamoDAO.Prestamo", ex);
+            System.out.println("Error [editorialDAO][insertEditorial][SQLException]: " + ex.getMessage());
+            ex.printStackTrace();
+            b = true;
         } finally {
             try {
                 stmt.close();
             } catch (Exception e) {
             }
         }
+        return b;
     }
 
     public void deletePrestamo(Prestamo pre) {
@@ -124,7 +128,7 @@ public class PrestamoDAO {
                     + " t.tit_cod = c.cop_titulo"
                     + " AND pre_fecha BETWEEN ? AND ?"
                     + " AND pre_rut = ?";
-            System.out.println("sql : "+sql);
+            System.out.println("sql : " + sql);
             stmt = conn.prepareStatement(sql);
             stmt.setDate(1, fechaInicio);
             stmt.setDate(2, fechaTermino);
